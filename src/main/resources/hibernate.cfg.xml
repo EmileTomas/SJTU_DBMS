@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/socialPractice</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <mapping class="com.sp_seiee.GradeEntity"/>
+        <mapping class="com.sp_seiee.OtherschoolstudentEntity"/>
+        <mapping class="com.sp_seiee.StudentEntity"/>
+        <mapping class="com.sp_seiee.TeacherEntity"/>
+        <mapping class="com.sp_seiee.TeamEntity"/>
+        <property name="connection.username">root</property>
+        <property name="connection.password">tobeno.1</property>
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

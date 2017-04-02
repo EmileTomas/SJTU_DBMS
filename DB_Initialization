@@ -1,0 +1,59 @@
+CREATE TABLE team(
+  leaderStuNum  VARCHAR(20),
+  projectName VARCHAR(30),
+  projectType VARCHAR(30),
+  projectIndex  VARCHAR(4),
+  importantFlag TINYINT(1),
+  practiceLocation  VARCHAR(40),
+  startTime DATE,
+  endTime DATE,
+  teacherNum  VARCHAR(15),
+  expertNum VARCHAR(15),
+  PRIMARY KEY(leaderStuNum)
+);
+CREATE TABLE student(
+  stuNum  VARCHAR(20),
+  leaderNum VARCHAR(20),
+  name  VARCHAR(20),
+  educationBg  VARCHAR(10),
+  department  VARCHAR(15),
+  phoneNum  VARCHAR(14),
+  email   VARCHAR(30),
+  idType  VARCHAR(5),
+  idNum VARCHAR(20),
+  birthday  DATE,
+  PRIMARY KEY(stuNum)
+);
+CREATE TABLE teacher(
+  teacherNum  VARCHAR(15),
+  leaderNum VARCHAR(20),
+  name  VARCHAR(20),
+  jobTitle  VARCHAR(10),
+  department  VARCHAR(15),
+  phoneNum  VARCHAR(14),
+  email VARCHAR(30),
+  idType  VARCHAR(5),
+  idNum VARCHAR(20),
+  birthday  DATE,
+  PRIMARY KEY (teacherNum)
+);
+CREATE TABLE otherSchoolStudent(
+  name  VARCHAR(20),
+  leaderNum VARCHAR(20),
+  school  VARCHAR(20),
+  phoneNum  VARCHAR(14),
+  email VARCHAR(30),
+  idType  VARCHAR(5),
+  idNum VARCHAR(20),
+  birthday  DATE,
+  PRIMARY KEY (name,leaderNum)
+);
+CREATE TABLE grade(
+  stuNum VARCHAR(20),
+  introClass  TINYINT(1),
+  subIntroClass TINYINT(1),
+  team TINYINT(1),
+  participation TINYINT(1),
+  report  TINYINT(1),
+  PRIMARY KEY (stuNum)
+);
