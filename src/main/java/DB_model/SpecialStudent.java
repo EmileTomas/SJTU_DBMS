@@ -7,10 +7,10 @@ import java.sql.Date;
  * Created by Administrator on 2017/4/2.
  */
 @Entity
-@Table(name = "specialstudent", schema = "socialpractice", catalog = "")
+@IdClass(SpecialStudentPK.class)
 public class SpecialStudent {
     private String name;
-    private String leaderNum;
+    private String leaderStuNum;
     private String school;
     private String phoneNum;
     private String email;
@@ -18,7 +18,7 @@ public class SpecialStudent {
     private String idNum;
     private Date birthday;
 
-    @Basic
+    @Id
     @Column(name = "name")
     public String getName() {
         return name;
@@ -28,14 +28,14 @@ public class SpecialStudent {
         this.name = name;
     }
 
-    @Basic
-    @Column(name = "leaderNum")
-    public String getLeaderNum() {
-        return leaderNum;
+    @Id
+    @Column(name = "leaderStuNum")
+    public String getLeaderStuNum() {
+        return leaderStuNum;
     }
 
-    public void setLeaderNum(String leaderNum) {
-        this.leaderNum = leaderNum;
+    public void setLeaderStuNum(String leaderStuNum) {
+        this.leaderStuNum = leaderStuNum;
     }
 
     @Basic
@@ -78,7 +78,7 @@ public class SpecialStudent {
         this.idType = idType;
     }
 
-    @Id
+    @Basic
     @Column(name = "idNum")
     public String getIdNum() {
         return idNum;
@@ -106,7 +106,7 @@ public class SpecialStudent {
         SpecialStudent that = (SpecialStudent) o;
 
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (leaderNum != null ? !leaderNum.equals(that.leaderNum) : that.leaderNum != null) return false;
+        if (leaderStuNum != null ? !leaderStuNum.equals(that.leaderStuNum) : that.leaderStuNum != null) return false;
         if (school != null ? !school.equals(that.school) : that.school != null) return false;
         if (phoneNum != null ? !phoneNum.equals(that.phoneNum) : that.phoneNum != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
@@ -120,7 +120,7 @@ public class SpecialStudent {
     @Override
     public int hashCode() {
         int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (leaderNum != null ? leaderNum.hashCode() : 0);
+        result = 31 * result + (leaderStuNum != null ? leaderStuNum.hashCode() : 0);
         result = 31 * result + (school != null ? school.hashCode() : 0);
         result = 31 * result + (phoneNum != null ? phoneNum.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);

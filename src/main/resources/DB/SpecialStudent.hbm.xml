@@ -5,13 +5,15 @@
 <hibernate-mapping>
 
     <class name="DB_model.SpecialStudent" table="specialstudent" schema="socialpractice">
-        <id name="idNum" column="idNum"/>
-        <property name="name" column="name"/>
-        <property name="leaderNum" column="leaderNum"/>
+        <composite-id mapped="true" class="DB_model.SpecialStudentPK">
+            <key-property name="name" column="name"/>
+            <key-property name="leaderStuNum" column="leaderStuNum"/>
+        </composite-id>
         <property name="school" column="school"/>
         <property name="phoneNum" column="phoneNum"/>
         <property name="email" column="email"/>
         <property name="idType" column="idType"/>
+        <property name="idNum" column="idNum"/>
         <property name="birthday" column="birthday"/>
     </class>
 </hibernate-mapping>

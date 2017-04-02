@@ -1,50 +1,40 @@
-import org.hibernate.HibernateException;
-import org.hibernate.Metamodel;
-import org.hibernate.query.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
-
-import javax.persistence.metamodel.EntityType;
-
-import java.util.Map;
 
 /**
  * Created by Administrator on 2017/4/2.
  */
 public class Main {
-    private static final SessionFactory ourSessionFactory;
+    private static final SessionFactory factory;
 
     static {
         try {
             Configuration configuration = new Configuration();
             configuration.configure();
 
-            ourSessionFactory = configuration.buildSessionFactory();
+            factory = configuration.buildSessionFactory();
         } catch (Throwable ex) {
+            System.err.println("Failed to create session factory.");
             throw new ExceptionInInitializerError(ex);
         }
     }
 
-    public static Session getSession() throws HibernateException {
-        return ourSessionFactory.openSession();
-    }
 
     public static void main(final String[] args) throws Exception {
         final Session session = getSession();
+        Transaction tx=null;
         try {
-            System.out.println("querying all the managed entities...");
-            final Metamodel metamodel = session.getSessionFactory().getMetamodel();
-            for (EntityType<?> entityType : metamodel.getEntities()) {
-                final String entityName = entityType.getName();
-                final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-            }
+            tx=session.getTransaction();
+
         } finally {
             session.close();
         }
     }
+
+
+    public static Session getSession() throws HibernateException {
+        return factory.openSession();
+    }
+
+
 }

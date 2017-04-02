@@ -1,16 +1,18 @@
 package DB_model;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Date;
 
 /**
  * Created by Administrator on 2017/4/2.
  */
 @Entity
-@Table(name = "student", schema = "socialpractice", catalog = "")
 public class Student {
     private String stuNum;
-    private String leaderNum;
+    private String leaderStuNum;
     private String name;
     private String educationBg;
     private String department;
@@ -31,13 +33,13 @@ public class Student {
     }
 
     @Basic
-    @Column(name = "leaderNum")
-    public String getLeaderNum() {
-        return leaderNum;
+    @Column(name = "leaderStuNum")
+    public String getLeaderStuNum() {
+        return leaderStuNum;
     }
 
-    public void setLeaderNum(String leaderNum) {
-        this.leaderNum = leaderNum;
+    public void setLeaderStuNum(String leaderStuNum) {
+        this.leaderStuNum = leaderStuNum;
     }
 
     @Basic
@@ -125,18 +127,19 @@ public class Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Student that = (Student) o;
+        Student student = (Student) o;
 
-        if (stuNum != null ? !stuNum.equals(that.stuNum) : that.stuNum != null) return false;
-        if (leaderNum != null ? !leaderNum.equals(that.leaderNum) : that.leaderNum != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (educationBg != null ? !educationBg.equals(that.educationBg) : that.educationBg != null) return false;
-        if (department != null ? !department.equals(that.department) : that.department != null) return false;
-        if (phoneNum != null ? !phoneNum.equals(that.phoneNum) : that.phoneNum != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (idType != null ? !idType.equals(that.idType) : that.idType != null) return false;
-        if (idNum != null ? !idNum.equals(that.idNum) : that.idNum != null) return false;
-        if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
+        if (stuNum != null ? !stuNum.equals(student.stuNum) : student.stuNum != null) return false;
+        if (leaderStuNum != null ? !leaderStuNum.equals(student.leaderStuNum) : student.leaderStuNum != null)
+            return false;
+        if (name != null ? !name.equals(student.name) : student.name != null) return false;
+        if (educationBg != null ? !educationBg.equals(student.educationBg) : student.educationBg != null) return false;
+        if (department != null ? !department.equals(student.department) : student.department != null) return false;
+        if (phoneNum != null ? !phoneNum.equals(student.phoneNum) : student.phoneNum != null) return false;
+        if (email != null ? !email.equals(student.email) : student.email != null) return false;
+        if (idType != null ? !idType.equals(student.idType) : student.idType != null) return false;
+        if (idNum != null ? !idNum.equals(student.idNum) : student.idNum != null) return false;
+        if (birthday != null ? !birthday.equals(student.birthday) : student.birthday != null) return false;
 
         return true;
     }
@@ -144,7 +147,7 @@ public class Student {
     @Override
     public int hashCode() {
         int result = stuNum != null ? stuNum.hashCode() : 0;
-        result = 31 * result + (leaderNum != null ? leaderNum.hashCode() : 0);
+        result = 31 * result + (leaderStuNum != null ? leaderStuNum.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (educationBg != null ? educationBg.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);

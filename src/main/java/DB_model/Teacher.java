@@ -7,10 +7,10 @@ import java.sql.Date;
  * Created by Administrator on 2017/4/2.
  */
 @Entity
-@Table(name = "teacher", schema = "socialpractice", catalog = "")
+@IdClass(TeacherPK.class)
 public class Teacher {
     private String teacherNum;
-    private String leaderNum;
+    private String leaderStuNum;
     private String name;
     private String jobTitle;
     private String department;
@@ -19,6 +19,7 @@ public class Teacher {
     private String idType;
     private String idNum;
     private Date birthday;
+    private byte expertFlag;
 
     @Id
     @Column(name = "teacherNum")
@@ -30,14 +31,14 @@ public class Teacher {
         this.teacherNum = teacherNum;
     }
 
-    @Basic
-    @Column(name = "leaderNum")
-    public String getLeaderNum() {
-        return leaderNum;
+    @Id
+    @Column(name = "leaderStuNum")
+    public String getLeaderStuNum() {
+        return leaderStuNum;
     }
 
-    public void setLeaderNum(String leaderNum) {
-        this.leaderNum = leaderNum;
+    public void setLeaderStuNum(String leaderStuNum) {
+        this.leaderStuNum = leaderStuNum;
     }
 
     @Basic
@@ -120,23 +121,35 @@ public class Teacher {
         this.birthday = birthday;
     }
 
+    @Basic
+    @Column(name = "expertFlag")
+    public byte getExpertFlag() {
+        return expertFlag;
+    }
+
+    public void setExpertFlag(byte expertFlag) {
+        this.expertFlag = expertFlag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Teacher that = (Teacher) o;
+        Teacher teacher = (Teacher) o;
 
-        if (teacherNum != null ? !teacherNum.equals(that.teacherNum) : that.teacherNum != null) return false;
-        if (leaderNum != null ? !leaderNum.equals(that.leaderNum) : that.leaderNum != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (jobTitle != null ? !jobTitle.equals(that.jobTitle) : that.jobTitle != null) return false;
-        if (department != null ? !department.equals(that.department) : that.department != null) return false;
-        if (phoneNum != null ? !phoneNum.equals(that.phoneNum) : that.phoneNum != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (idType != null ? !idType.equals(that.idType) : that.idType != null) return false;
-        if (idNum != null ? !idNum.equals(that.idNum) : that.idNum != null) return false;
-        if (birthday != null ? !birthday.equals(that.birthday) : that.birthday != null) return false;
+        if (expertFlag != teacher.expertFlag) return false;
+        if (teacherNum != null ? !teacherNum.equals(teacher.teacherNum) : teacher.teacherNum != null) return false;
+        if (leaderStuNum != null ? !leaderStuNum.equals(teacher.leaderStuNum) : teacher.leaderStuNum != null)
+            return false;
+        if (name != null ? !name.equals(teacher.name) : teacher.name != null) return false;
+        if (jobTitle != null ? !jobTitle.equals(teacher.jobTitle) : teacher.jobTitle != null) return false;
+        if (department != null ? !department.equals(teacher.department) : teacher.department != null) return false;
+        if (phoneNum != null ? !phoneNum.equals(teacher.phoneNum) : teacher.phoneNum != null) return false;
+        if (email != null ? !email.equals(teacher.email) : teacher.email != null) return false;
+        if (idType != null ? !idType.equals(teacher.idType) : teacher.idType != null) return false;
+        if (idNum != null ? !idNum.equals(teacher.idNum) : teacher.idNum != null) return false;
+        if (birthday != null ? !birthday.equals(teacher.birthday) : teacher.birthday != null) return false;
 
         return true;
     }
@@ -144,7 +157,7 @@ public class Teacher {
     @Override
     public int hashCode() {
         int result = teacherNum != null ? teacherNum.hashCode() : 0;
-        result = 31 * result + (leaderNum != null ? leaderNum.hashCode() : 0);
+        result = 31 * result + (leaderStuNum != null ? leaderStuNum.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
@@ -153,6 +166,7 @@ public class Teacher {
         result = 31 * result + (idType != null ? idType.hashCode() : 0);
         result = 31 * result + (idNum != null ? idNum.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (int) expertFlag;
         return result;
     }
 }

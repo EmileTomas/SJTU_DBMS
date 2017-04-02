@@ -6,7 +6,7 @@
 
     <class name="DB_model.Student" table="student" schema="socialpractice">
         <id name="stuNum" column="stuNum"/>
-        <property name="leaderNum" column="leaderNum"/>
+        <property name="leaderStuNum" column="leaderStuNum"/>
         <property name="name" column="name"/>
         <property name="educationBg" column="educationBg"/>
         <property name="department" column="department"/>

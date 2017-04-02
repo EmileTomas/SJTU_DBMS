@@ -1,59 +1,76 @@
-CREATE TABLE team(
-  leaderStuNum  VARCHAR(20),
-  projectName VARCHAR(30),
-  projectType VARCHAR(30),
-  projectIndex  VARCHAR(4),
-  importantFlag TINYINT(1),
-  practiceLocation  VARCHAR(40),
-  startTime DATE,
-  endTime DATE,
-  teacherNum  VARCHAR(15),
-  expertNum VARCHAR(15),
-  PRIMARY KEY(leaderStuNum)
+CREATE TABLE team (
+  leaderStuNum     VARCHAR(20) NOT NULL,
+  projectName      VARCHAR(30) NOT NULL,
+  projectType      VARCHAR(30) NOT NULL,
+  projectIndex     VARCHAR(4),
+  importantFlag    TINYINT(1),
+  practiceLocation VARCHAR(40),
+  startTime        DATE,
+  endTime          DATE,
+  teacherNum       VARCHAR(15),
+  expertNum        VARCHAR(15),
+  applyStatus      VARCHAR(10) DEFAULT 'Waiting',
+  PRIMARY KEY (leaderStuNum)
 );
-CREATE TABLE student(
-  stuNum  VARCHAR(20),
-  leaderNum VARCHAR(20),
-  name  VARCHAR(20),
-  educationBg  VARCHAR(10),
-  department  VARCHAR(15),
-  phoneNum  VARCHAR(14),
-  email   VARCHAR(30),
-  idType  VARCHAR(5),
-  idNum VARCHAR(20),
-  birthday  DATE,
-  PRIMARY KEY(stuNum)
-);
-CREATE TABLE teacher(
-  teacherNum  VARCHAR(15),
-  leaderNum VARCHAR(20),
-  name  VARCHAR(20),
-  jobTitle  VARCHAR(10),
-  department  VARCHAR(15),
-  phoneNum  VARCHAR(14),
-  email VARCHAR(30),
-  idType  VARCHAR(5),
-  idNum VARCHAR(20),
-  birthday  DATE,
-  PRIMARY KEY (teacherNum)
-);
-CREATE TABLE otherSchoolStudent(
-  name  VARCHAR(20),
-  leaderNum VARCHAR(20),
-  school  VARCHAR(20),
-  phoneNum  VARCHAR(14),
-  email VARCHAR(30),
-  idType  VARCHAR(5),
-  idNum VARCHAR(20),
-  birthday  DATE,
-  PRIMARY KEY (name,leaderNum)
-);
-CREATE TABLE grade(
-  stuNum VARCHAR(20),
-  introClass  TINYINT(1),
-  subIntroClass TINYINT(1),
-  team TINYINT(1),
-  participation TINYINT(1),
-  report  TINYINT(1),
+CREATE TABLE student (
+  stuNum       VARCHAR(20) NOT NULL,
+  leaderStuNum VARCHAR(20),
+  name         VARCHAR(20) NOT NULL,
+  educationBg  VARCHAR(10) NOT NULL,
+  department   VARCHAR(15) NOT NULL,
+  phoneNum     VARCHAR(14) NOT NULL,
+  email        VARCHAR(30) NOT NULL,
+  idType       VARCHAR(5)  NOT NULL,
+  idNum        VARCHAR(20) NOT NULL,
+  birthday     DATE        NOT NULL,
   PRIMARY KEY (stuNum)
+);
+CREATE TABLE teacher (
+  teacherNum   VARCHAR(15) NOT NULL,
+  leaderStuNum VARCHAR(20) NOT NULL,
+  name         VARCHAR(20) NOT NULL,
+  jobTitle     VARCHAR(10) NOT NULL,
+  department   VARCHAR(15) NOT NULL,
+  phoneNum     VARCHAR(14) NOT NULL,
+  email        VARCHAR(30) NOT NULL,
+  idType       VARCHAR(5)  NOT NULL,
+  idNum        VARCHAR(20) NOT NULL,
+  birthday     DATE        NOT NULL,
+  expertFlag   TINYINT(1)  NOT NULL,
+  PRIMARY KEY (teacherNum, leaderStuNum)
+);
+CREATE TABLE specialStudent (
+  name         VARCHAR(20) NOT NULL,
+  leaderStuNum VARCHAR(20) NOT NULL,
+  school       VARCHAR(20) NOT NULL,
+  phoneNum     VARCHAR(14) NOT NULL,
+  email        VARCHAR(30) NOT NULL,
+  idType       VARCHAR(5)  NOT NULL,
+  idNum        VARCHAR(20) NOT NULL,
+  birthday     DATE        NOT NULL,
+  PRIMARY KEY (name, leaderStuNum)
+);
+CREATE TABLE grade (
+  stuNum        VARCHAR(20) NOT NULL,
+  introClass    TINYINT(3),
+  subIntroClass TINYINT(3),
+  team          TINYINT(3),
+  participation TINYINT(3),
+  report        TINYINT(3),
+  PRIMARY KEY (stuNum)
+);
+
+CREATE TABLE apply (
+  stuNum       VARCHAR(20) NOT NULL,
+  leaderStuNum VARCHAR(20) NOT NULL,
+  PRIMARY KEY (stuNum, leaderStuNum)
+);
+
+Create TABLE recruit(
+  leaderStuNum VARCHAR(20) NOT NULL ,
+  numToHire SMALLINT(4) NOT NULL ,
+  deadline  DATETIME NOT NULL ,
+  teamDescribe VARCHAR(1000) NOT NULL ,
+  requirement VARCHAR(1000) NOT NULL ,
+  PRIMARY KEY (leaderStuNum)
 );

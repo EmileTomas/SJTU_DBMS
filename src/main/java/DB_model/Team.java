@@ -1,13 +1,15 @@
 package DB_model;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.sql.Date;
 
 /**
  * Created by Administrator on 2017/4/2.
  */
 @Entity
-@Table(name = "team", schema = "socialpractice", catalog = "")
 public class Team {
     private String leaderStuNum;
     private String projectName;
@@ -19,6 +21,7 @@ public class Team {
     private Date endTime;
     private String teacherNum;
     private String expertNum;
+    private String applyStatus;
 
     @Id
     @Column(name = "leaderStuNum")
@@ -120,25 +123,36 @@ public class Team {
         this.expertNum = expertNum;
     }
 
+    @Basic
+    @Column(name = "applyStatus")
+    public String getApplyStatus() {
+        return applyStatus;
+    }
+
+    public void setApplyStatus(String applyStatus) {
+        this.applyStatus = applyStatus;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Team that = (Team) o;
+        Team team = (Team) o;
 
-        if (leaderStuNum != null ? !leaderStuNum.equals(that.leaderStuNum) : that.leaderStuNum != null) return false;
-        if (projectName != null ? !projectName.equals(that.projectName) : that.projectName != null) return false;
-        if (projectType != null ? !projectType.equals(that.projectType) : that.projectType != null) return false;
-        if (projectIndex != null ? !projectIndex.equals(that.projectIndex) : that.projectIndex != null) return false;
-        if (importantFlag != null ? !importantFlag.equals(that.importantFlag) : that.importantFlag != null)
+        if (leaderStuNum != null ? !leaderStuNum.equals(team.leaderStuNum) : team.leaderStuNum != null) return false;
+        if (projectName != null ? !projectName.equals(team.projectName) : team.projectName != null) return false;
+        if (projectType != null ? !projectType.equals(team.projectType) : team.projectType != null) return false;
+        if (projectIndex != null ? !projectIndex.equals(team.projectIndex) : team.projectIndex != null) return false;
+        if (importantFlag != null ? !importantFlag.equals(team.importantFlag) : team.importantFlag != null)
             return false;
-        if (practiceLocation != null ? !practiceLocation.equals(that.practiceLocation) : that.practiceLocation != null)
+        if (practiceLocation != null ? !practiceLocation.equals(team.practiceLocation) : team.practiceLocation != null)
             return false;
-        if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
-        if (endTime != null ? !endTime.equals(that.endTime) : that.endTime != null) return false;
-        if (teacherNum != null ? !teacherNum.equals(that.teacherNum) : that.teacherNum != null) return false;
-        if (expertNum != null ? !expertNum.equals(that.expertNum) : that.expertNum != null) return false;
+        if (startTime != null ? !startTime.equals(team.startTime) : team.startTime != null) return false;
+        if (endTime != null ? !endTime.equals(team.endTime) : team.endTime != null) return false;
+        if (teacherNum != null ? !teacherNum.equals(team.teacherNum) : team.teacherNum != null) return false;
+        if (expertNum != null ? !expertNum.equals(team.expertNum) : team.expertNum != null) return false;
+        if (applyStatus != null ? !applyStatus.equals(team.applyStatus) : team.applyStatus != null) return false;
 
         return true;
     }
@@ -155,6 +169,7 @@ public class Team {
         result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
         result = 31 * result + (teacherNum != null ? teacherNum.hashCode() : 0);
         result = 31 * result + (expertNum != null ? expertNum.hashCode() : 0);
+        result = 31 * result + (applyStatus != null ? applyStatus.hashCode() : 0);
         return result;
     }
 }

@@ -5,8 +5,10 @@
 <hibernate-mapping>
 
     <class name="DB_model.Teacher" table="teacher" schema="socialpractice">
-        <id name="teacherNum" column="teacherNum"/>
-        <property name="leaderNum" column="leaderNum"/>
+        <composite-id mapped="true" class="DB_model.TeacherPK">
+            <key-property name="teacherNum" column="teacherNum"/>
+            <key-property name="leaderStuNum" column="leaderStuNum"/>
+        </composite-id>
         <property name="name" column="name"/>
         <property name="jobTitle" column="jobTitle"/>
         <property name="department" column="department"/>
@@ -15,5 +17,6 @@
         <property name="idType" column="idType"/>
         <property name="idNum" column="idNum"/>
         <property name="birthday" column="birthday"/>
+        <property name="expertFlag" column="expertFlag"/>
     </class>
 </hibernate-mapping>

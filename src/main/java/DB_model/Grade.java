@@ -1,12 +1,14 @@
 package DB_model;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * Created by Administrator on 2017/4/2.
  */
 @Entity
-@Table(name = "grade", schema = "socialpractice", catalog = "")
 public class Grade {
     private String stuNum;
     private Byte introClass;
@@ -80,16 +82,16 @@ public class Grade {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Grade that = (Grade) o;
+        Grade grade = (Grade) o;
 
-        if (stuNum != null ? !stuNum.equals(that.stuNum) : that.stuNum != null) return false;
-        if (introClass != null ? !introClass.equals(that.introClass) : that.introClass != null) return false;
-        if (subIntroClass != null ? !subIntroClass.equals(that.subIntroClass) : that.subIntroClass != null)
+        if (stuNum != null ? !stuNum.equals(grade.stuNum) : grade.stuNum != null) return false;
+        if (introClass != null ? !introClass.equals(grade.introClass) : grade.introClass != null) return false;
+        if (subIntroClass != null ? !subIntroClass.equals(grade.subIntroClass) : grade.subIntroClass != null)
             return false;
-        if (team != null ? !team.equals(that.team) : that.team != null) return false;
-        if (participation != null ? !participation.equals(that.participation) : that.participation != null)
+        if (team != null ? !team.equals(grade.team) : grade.team != null) return false;
+        if (participation != null ? !participation.equals(grade.participation) : grade.participation != null)
             return false;
-        if (report != null ? !report.equals(that.report) : that.report != null) return false;
+        if (report != null ? !report.equals(grade.report) : grade.report != null) return false;
 
         return true;
     }

@@ -15,5 +15,6 @@
         <property name="endTime" column="endTime"/>
         <property name="teacherNum" column="teacherNum"/>
         <property name="expertNum" column="expertNum"/>
+        <property name="applyStatus" column="applyStatus"/>
     </class>
 </hibernate-mapping>
