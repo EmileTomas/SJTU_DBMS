@@ -1,4 +1,4 @@
-package com.sp_seiee;
+package DB_model;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -7,12 +7,13 @@ import java.sql.Date;
  * Created by Administrator on 2017/4/2.
  */
 @Entity
-@Table(name = "otherschoolstudent", schema = "socialpractice", catalog = "")
-@IdClass(OtherschoolstudentEntityPK.class)
-public class OtherschoolstudentEntity {
-    private String name;
+@Table(name = "teacher", schema = "socialpractice", catalog = "")
+public class Teacher {
+    private String teacherNum;
     private String leaderNum;
-    private String school;
+    private String name;
+    private String jobTitle;
+    private String department;
     private String phoneNum;
     private String email;
     private String idType;
@@ -20,16 +21,16 @@ public class OtherschoolstudentEntity {
     private Date birthday;
 
     @Id
-    @Column(name = "name")
-    public String getName() {
-        return name;
+    @Column(name = "teacherNum")
+    public String getTeacherNum() {
+        return teacherNum;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTeacherNum(String teacherNum) {
+        this.teacherNum = teacherNum;
     }
 
-    @Id
+    @Basic
     @Column(name = "leaderNum")
     public String getLeaderNum() {
         return leaderNum;
@@ -40,13 +41,33 @@ public class OtherschoolstudentEntity {
     }
 
     @Basic
-    @Column(name = "school")
-    public String getSchool() {
-        return school;
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setSchool(String school) {
-        this.school = school;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Basic
+    @Column(name = "jobTitle")
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    @Basic
+    @Column(name = "department")
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     @Basic
@@ -104,11 +125,13 @@ public class OtherschoolstudentEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OtherschoolstudentEntity that = (OtherschoolstudentEntity) o;
+        Teacher that = (Teacher) o;
 
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (teacherNum != null ? !teacherNum.equals(that.teacherNum) : that.teacherNum != null) return false;
         if (leaderNum != null ? !leaderNum.equals(that.leaderNum) : that.leaderNum != null) return false;
-        if (school != null ? !school.equals(that.school) : that.school != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (jobTitle != null ? !jobTitle.equals(that.jobTitle) : that.jobTitle != null) return false;
+        if (department != null ? !department.equals(that.department) : that.department != null) return false;
         if (phoneNum != null ? !phoneNum.equals(that.phoneNum) : that.phoneNum != null) return false;
         if (email != null ? !email.equals(that.email) : that.email != null) return false;
         if (idType != null ? !idType.equals(that.idType) : that.idType != null) return false;
@@ -120,9 +143,11 @@ public class OtherschoolstudentEntity {
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
+        int result = teacherNum != null ? teacherNum.hashCode() : 0;
         result = 31 * result + (leaderNum != null ? leaderNum.hashCode() : 0);
-        result = 31 * result + (school != null ? school.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
+        result = 31 * result + (department != null ? department.hashCode() : 0);
         result = 31 * result + (phoneNum != null ? phoneNum.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (idType != null ? idType.hashCode() : 0);

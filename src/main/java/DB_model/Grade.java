@@ -1,4 +1,4 @@
-package com.sp_seiee;
+package DB_model;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "grade", schema = "socialpractice", catalog = "")
-public class GradeEntity {
+public class Grade {
     private String stuNum;
     private Byte introClass;
     private Byte subIntroClass;
@@ -80,7 +80,7 @@ public class GradeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GradeEntity that = (GradeEntity) o;
+        Grade that = (Grade) o;
 
         if (stuNum != null ? !stuNum.equals(that.stuNum) : that.stuNum != null) return false;
         if (introClass != null ? !introClass.equals(that.introClass) : that.introClass != null) return false;

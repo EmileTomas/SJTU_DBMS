@@ -6,13 +6,21 @@
     <session-factory>
         <property name="connection.url">jdbc:mysql://localhost:3306/socialPractice</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <mapping class="com.sp_seiee.GradeEntity"/>
-        <mapping class="com.sp_seiee.OtherschoolstudentEntity"/>
-        <mapping class="com.sp_seiee.StudentEntity"/>
-        <mapping class="com.sp_seiee.TeacherEntity"/>
-        <mapping class="com.sp_seiee.TeamEntity"/>
         <property name="connection.username">root</property>
         <property name="connection.password">tobeno.1</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect </property>
+
+        <mapping resource="DB/Grade.hbm.xml"/>
+        <mapping class="DB_model.Grade"/>
+        <mapping resource="DB/SpecialStudent.hbm.xml"/>
+        <mapping class="DB_model.SpecialStudent"/>
+        <mapping class="DB_model.Student"/>
+        <mapping resource="DB/Student.hbm.xml"/>
+        <mapping class="DB_model.Teacher"/>
+        <mapping resource="DB/Teacher.hbm.xml"/>
+        <mapping resource="DB/Team.hbm.xml"/>
+        <mapping class="DB_model.Team"/>
+
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

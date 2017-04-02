@@ -1,4 +1,4 @@
-package com.sp_seiee;
+package DB_model;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -8,7 +8,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "student", schema = "socialpractice", catalog = "")
-public class StudentEntity {
+public class Student {
     private String stuNum;
     private String leaderNum;
     private String name;
@@ -125,7 +125,7 @@ public class StudentEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StudentEntity that = (StudentEntity) o;
+        Student that = (Student) o;
 
         if (stuNum != null ? !stuNum.equals(that.stuNum) : that.stuNum != null) return false;
         if (leaderNum != null ? !leaderNum.equals(that.leaderNum) : that.leaderNum != null) return false;
