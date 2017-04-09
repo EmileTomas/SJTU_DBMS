@@ -4,26 +4,19 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/socialPractice</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/learn</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect </property>
-        <mapping class="DB_model.Apply"/>
-        <mapping resource="DB/Apply.hbm.xml"/>
-        <mapping resource="DB/Grade.hbm.xml"/>
-        <mapping class="DB_model.Grade"/>
-        <mapping resource="DB/Recruit.hbm.xml"/>
-        <mapping class="DB_model.Recruit"/>
-        <mapping class="DB_model.SpecialStudent"/>
-        <mapping resource="DB/SpecialStudent.hbm.xml"/>
-        <mapping class="DB_model.Student"/>
-        <mapping resource="DB/Student.hbm.xml"/>
-        <mapping class="DB_model.Teacher"/>
-        <mapping resource="DB/Teacher.hbm.xml"/>
-        <mapping class="DB_model.Team"/>
-        <mapping resource="DB/Team.hbm.xml"/>
+        <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">tobeno.1</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
+        <mapping class="DB_model.Student"/>
+        <mapping class="DB_model.GroupLeader"/>
+        <mapping class="DB_model.GroupMember"/>
+        <mapping class="DB_model.SpecialStudent"/>
 
         <!-- DB schema will be updated if needed -->
-        <!-- <property name="hbm2ddl.auto">update</property> -->
+
     </session-factory>
 </hibernate-configuration>

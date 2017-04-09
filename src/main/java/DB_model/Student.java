@@ -1,99 +1,48 @@
 package DB_model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
- * Created by Administrator on 2017/4/2.
+ * Created by Administrator on 2017/4/9.
  */
 @Entity
+@DiscriminatorColumn(name="studentType",
+    discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorValue("NormalStudent")
+@IdClass(StudentPK.class)
 public class Student {
-    private String stuNum;
-    private String leaderStuNum;
-    private String name;
-    private String educationBg;
-    private String department;
-    private String phoneNum;
-    private String email;
+    @Id
+    @Column(name = "idType")
     private String idType;
-    private String idNum;
-    private Date birthday;
 
     @Id
-    @Column(name = "stuNum")
-    public String getStuNum() {
-        return stuNum;
-    }
-
-    public void setStuNum(String stuNum) {
-        this.stuNum = stuNum;
-    }
-
-    @Basic
-    @Column(name = "leaderStuNum")
-    public String getLeaderStuNum() {
-        return leaderStuNum;
-    }
-
-    public void setLeaderStuNum(String leaderStuNum) {
-        this.leaderStuNum = leaderStuNum;
-    }
+    @Column(name = "idNum")
+    private String idNum;
 
     @Basic
     @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String name;
 
     @Basic
     @Column(name = "educationBg")
-    public String getEducationBg() {
-        return educationBg;
-    }
-
-    public void setEducationBg(String educationBg) {
-        this.educationBg = educationBg;
-    }
-
-    @Basic
-    @Column(name = "department")
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
+    private String educationBg;
     @Basic
     @Column(name = "phoneNum")
-    public String getPhoneNum() {
-        return phoneNum;
-    }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
+    private String phoneNum;
 
     @Basic
     @Column(name = "email")
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    private String email;
 
     @Basic
-    @Column(name = "idType")
+    @Column(name="school")
+    private String school;
+
+    @Basic
+    @Column(name = "birthday")
+    private Date birthday;
+
     public String getIdType() {
         return idType;
     }
@@ -102,8 +51,6 @@ public class Student {
         this.idType = idType;
     }
 
-    @Basic
-    @Column(name = "idNum")
     public String getIdNum() {
         return idNum;
     }
@@ -112,14 +59,52 @@ public class Student {
         this.idNum = idNum;
     }
 
-    @Basic
-    @Column(name = "birthday")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEducationBg() {
+        return educationBg;
+    }
+
+    public void setEducationBg(String educationBg) {
+        this.educationBg = educationBg;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Date getBirthday() {
         return birthday;
     }
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
     }
 
     @Override
@@ -129,33 +114,29 @@ public class Student {
 
         Student student = (Student) o;
 
-        if (stuNum != null ? !stuNum.equals(student.stuNum) : student.stuNum != null) return false;
-        if (leaderStuNum != null ? !leaderStuNum.equals(student.leaderStuNum) : student.leaderStuNum != null)
-            return false;
-        if (name != null ? !name.equals(student.name) : student.name != null) return false;
-        if (educationBg != null ? !educationBg.equals(student.educationBg) : student.educationBg != null) return false;
-        if (department != null ? !department.equals(student.department) : student.department != null) return false;
-        if (phoneNum != null ? !phoneNum.equals(student.phoneNum) : student.phoneNum != null) return false;
-        if (email != null ? !email.equals(student.email) : student.email != null) return false;
         if (idType != null ? !idType.equals(student.idType) : student.idType != null) return false;
         if (idNum != null ? !idNum.equals(student.idNum) : student.idNum != null) return false;
+        if (name != null ? !name.equals(student.name) : student.name != null) return false;
+        if (educationBg != null ? !educationBg.equals(student.educationBg) : student.educationBg != null) return false;
+        if (phoneNum != null ? !phoneNum.equals(student.phoneNum) : student.phoneNum != null) return false;
+        if (email != null ? !email.equals(student.email) : student.email != null) return false;
         if (birthday != null ? !birthday.equals(student.birthday) : student.birthday != null) return false;
+        if (school != null ? !school.equals(student.school) : student.school != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = stuNum != null ? stuNum.hashCode() : 0;
-        result = 31 * result + (leaderStuNum != null ? leaderStuNum.hashCode() : 0);
+        int result = idType != null ? idType.hashCode() : 0;
+        result = 31 * result + (idNum != null ? idNum.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (educationBg != null ? educationBg.hashCode() : 0);
-        result = 31 * result + (department != null ? department.hashCode() : 0);
         result = 31 * result + (phoneNum != null ? phoneNum.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (idType != null ? idType.hashCode() : 0);
-        result = 31 * result + (idNum != null ? idNum.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
+        result = 31 * result + (school != null ? school.hashCode() : 0);
+
         return result;
     }
 }

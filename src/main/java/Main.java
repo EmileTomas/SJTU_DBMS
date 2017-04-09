@@ -1,40 +1,48 @@
+import DB_model.GroupLeader;
+import DB_model.GroupMember;
+import Util.HibernateUtil;
 import org.hibernate.*;
-import org.hibernate.cfg.Configuration;
+import java.util.List;
 
 /**
- * Created by Administrator on 2017/4/2.
+ * Created by Administrator on 2017/4/4.
  */
 public class Main {
-    private static final SessionFactory factory;
-
-    static {
-        try {
-            Configuration configuration = new Configuration();
-            configuration.configure();
-
-            factory = configuration.buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Failed to create session factory.");
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
 
     public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
-        Transaction tx=null;
-        try {
-            tx=session.getTransaction();
+        SessionFactory sessionFactory= HibernateUtil.getSessionFactory();
+        Session session=sessionFactory.openSession();
+        Transaction tx=session.beginTransaction();
 
-        } finally {
-            session.close();
+        GroupMember groupMember=new GroupMember();
+        groupMember.setIdNum("00000");
+        groupMember.setIdType("SFZ");
+
+        GroupLeader groupLeader=new GroupLeader();
+        groupLeader.setIdType("SFZ");
+        groupLeader.setIdNum("88888");
+        groupLeader.setStuNumber("514103012");
+        groupMember.setGroupLeader(groupLeader);
+
+        GroupMember groupMember1=new GroupMember();
+        groupMember1.setIdType("TBZ");
+        groupMember1.setIdNum("666666");
+        groupMember1.setGroupLeader(groupLeader);
+        session.persist(groupMember1);
+        session.persist(groupMember);
+
+        tx.commit();
+        session.close();
+
+        session=sessionFactory.openSession();
+        Transaction x=session.beginTransaction();
+        List<GroupLeader> pl=session.createQuery("from GroupLeader ").list();
+        for(GroupLeader ele:pl){
+
+            System.out.println(ele.getIdNum());
         }
+        x.commit();
+        session.close();
+
     }
-
-
-    public static Session getSession() throws HibernateException {
-        return factory.openSession();
-    }
-
-
 }
