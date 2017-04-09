@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Administrator on 2017/4/9.
  */
-public class StudentPK implements Serializable {
+public class ID implements Serializable {
     private String idType;
     private String idNum;
 
@@ -31,10 +31,10 @@ public class StudentPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StudentPK studentPK = (StudentPK) o;
+        ID ID = (ID) o;
 
-        if (idType != null ? !idType.equals(studentPK.idType) : studentPK.idType != null) return false;
-        if (idNum != null ? !idNum.equals(studentPK.idNum) : studentPK.idNum != null) return false;
+        if (idType != null ? !idType.equals(ID.idType) : ID.idType != null) return false;
+        if (idNum != null ? !idNum.equals(ID.idNum) : ID.idNum != null) return false;
 
         return true;
     }

@@ -10,7 +10,7 @@ import java.sql.Date;
 @DiscriminatorColumn(name="studentType",
     discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("NormalStudent")
-@IdClass(StudentPK.class)
+@IdClass(ID.class)
 public class Student {
     @Id
     @Column(name = "idType")
