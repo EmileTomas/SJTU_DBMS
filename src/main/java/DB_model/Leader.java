@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
 @DiscriminatorValue("Leader")
 public class Leader extends Student {
@@ -16,10 +15,8 @@ public class Leader extends Student {
     @Column(name = "department")
     private String department;
 
-
     @OneToMany(targetEntity = Member.class, mappedBy = "leader")
     private Set<Member> members = new HashSet<>();
-
 
     @OneToMany(targetEntity = SpecialStudent.class, mappedBy = "leader")
     private Set<SpecialStudent> specialStudents = new HashSet<>();

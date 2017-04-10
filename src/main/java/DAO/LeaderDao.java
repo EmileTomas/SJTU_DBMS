@@ -1,21 +1,19 @@
 package DAO;
 
 import DB_model.Leader;
-import DB_model.Member;
-import DB_model.ID;
-import DB_model.SpecialStudent;
-
-import java.util.List;
+import DB_model.ID_PK;
 
 /**
  * Created by Administrator on 2017/4/9.
  */
 public interface LeaderDao {
-    public void insert(Leader leader);
+    public void save(Leader leader);
 
-    public void delete(ID leaderID);
+    public void delete(ID_PK leaderID);
 
-    public Leader find(ID leaderID);
+    public void delete(Leader leader);
+
+    public Leader find(ID_PK leaderID);
 
     public void update(Leader leader);
 }

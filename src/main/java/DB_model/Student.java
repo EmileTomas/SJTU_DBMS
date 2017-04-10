@@ -10,15 +10,9 @@ import java.sql.Date;
 @DiscriminatorColumn(name="studentType",
     discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("NormalStudent")
-@IdClass(ID.class)
 public class Student {
-    @Id
-    @Column(name = "idType")
-    private String idType;
-
-    @Id
-    @Column(name = "idNum")
-    private String idNum;
+    @EmbeddedId
+    private ID_PK id_PK;
 
     @Basic
     @Column(name = "name")
@@ -43,20 +37,12 @@ public class Student {
     @Column(name = "birthday")
     private Date birthday;
 
-    public String getIdType() {
-        return idType;
+    public ID_PK getID_PK() {
+        return id_PK;
     }
 
-    public void setIdType(String idType) {
-        this.idType = idType;
-    }
-
-    public String getIdNum() {
-        return idNum;
-    }
-
-    public void setIdNum(String idNum) {
-        this.idNum = idNum;
+    public void setID_PK(ID_PK id_PK) {
+        this.id_PK = id_PK;
     }
 
     public String getName() {
@@ -114,8 +100,7 @@ public class Student {
 
         Student student = (Student) o;
 
-        if (idType != null ? !idType.equals(student.idType) : student.idType != null) return false;
-        if (idNum != null ? !idNum.equals(student.idNum) : student.idNum != null) return false;
+        if (id_PK != null ? !id_PK.equals(student.id_PK) : student.id_PK != null) return false;
         if (name != null ? !name.equals(student.name) : student.name != null) return false;
         if (educationBg != null ? !educationBg.equals(student.educationBg) : student.educationBg != null) return false;
         if (phoneNum != null ? !phoneNum.equals(student.phoneNum) : student.phoneNum != null) return false;
@@ -128,8 +113,7 @@ public class Student {
 
     @Override
     public int hashCode() {
-        int result = idType != null ? idType.hashCode() : 0;
-        result = 31 * result + (idNum != null ? idNum.hashCode() : 0);
+        int result = id_PK != null ? id_PK.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (educationBg != null ? educationBg.hashCode() : 0);
         result = 31 * result + (phoneNum != null ? phoneNum.hashCode() : 0);

@@ -1,8 +1,10 @@
 package DB_model;
 
-import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 /**
  * Created by Administrator on 2017/4/9.
@@ -12,10 +14,10 @@ import javax.persistence.*;
 public class SpecialStudent extends Student {
     @ManyToOne(targetEntity = Leader.class)
     @JoinColumns(value = {
-            @JoinColumn(name="leaderIDType",referencedColumnName = "idType"),
-            @JoinColumn(name="leaderIDNum",referencedColumnName = "idNum")
+            @JoinColumn(name = "leaderIDType", referencedColumnName = "idType"),
+            @JoinColumn(name = "leaderIDNum", referencedColumnName = "idNum")
     })
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Leader leader;
 
     public Leader getLeader() {
@@ -25,8 +27,6 @@ public class SpecialStudent extends Student {
     public void setLeader(Leader leader) {
         this.leader = leader;
     }
-
-
 
     @Override
     public boolean equals(Object o) {

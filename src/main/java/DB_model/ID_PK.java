@@ -1,14 +1,21 @@
 package DB_model;
 
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 /**
  * Created by Administrator on 2017/4/9.
  */
-public class ID implements Serializable {
+@Embeddable
+public class ID_PK implements Serializable {
     private String idType;
     private String idNum;
 
+    public ID_PK(){}
+    public ID_PK(String idType,String idNum){
+        this.idType=idType;
+        this.idNum=idNum;
+    }
 
     public String getIdType() {
         return idType;
@@ -31,7 +38,7 @@ public class ID implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ID ID = (ID) o;
+        ID_PK ID = (ID_PK) o;
 
         if (idType != null ? !idType.equals(ID.idType) : ID.idType != null) return false;
         if (idNum != null ? !idNum.equals(ID.idNum) : ID.idNum != null) return false;

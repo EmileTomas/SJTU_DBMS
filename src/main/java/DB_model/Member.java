@@ -24,7 +24,7 @@ public class Member extends Student {
             @JoinColumn(name = "leaderIDType", referencedColumnName = "idType"),
             @JoinColumn(name = "leaderIDNum", referencedColumnName = "idNum")
     })
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Leader leader;
 
     public String getStuNumber() {
