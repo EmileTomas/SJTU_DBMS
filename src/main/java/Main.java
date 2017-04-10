@@ -1,5 +1,5 @@
-import DB_model.GroupLeader;
-import DB_model.GroupMember;
+import DB_model.Leader;
+import DB_model.Member;
 import Util.HibernateUtil;
 import org.hibernate.*;
 import java.util.List;
@@ -14,30 +14,30 @@ public class Main {
         Session session=sessionFactory.openSession();
         Transaction tx=session.beginTransaction();
 
-        GroupMember groupMember=new GroupMember();
-        groupMember.setIdNum("00000");
-        groupMember.setIdType("SFZ");
+        Member member =new Member();
+        member.setIdNum("00000");
+        member.setIdType("SFZ");
 
-        GroupLeader groupLeader=new GroupLeader();
-        groupLeader.setIdType("SFZ");
-        groupLeader.setIdNum("88888");
-        groupLeader.setStuNumber("514103012");
-        groupMember.setGroupLeader(groupLeader);
+        Leader leader =new Leader();
+        leader.setIdType("SFZ");
+        leader.setIdNum("88888");
+        leader.setStuNumber("514103012");
+        member.setLeader(leader);
 
-        GroupMember groupMember1=new GroupMember();
-        groupMember1.setIdType("TBZ");
-        groupMember1.setIdNum("666666");
-        groupMember1.setGroupLeader(groupLeader);
-        session.persist(groupMember1);
-        session.persist(groupMember);
+        Member member1 =new Member();
+        member1.setIdType("TBZ");
+        member1.setIdNum("666666");
+        member1.setLeader(leader);
+        session.persist(member1);
+        session.persist(member);
 
         tx.commit();
         session.close();
 
         session=sessionFactory.openSession();
         Transaction x=session.beginTransaction();
-        List<GroupLeader> pl=session.createQuery("from GroupLeader ").list();
-        for(GroupLeader ele:pl){
+        List<Leader> pl=session.createQuery("from Leader ").list();
+        for(Leader ele:pl){
 
             System.out.println(ele.getIdNum());
         }

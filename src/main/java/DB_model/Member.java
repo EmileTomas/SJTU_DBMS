@@ -9,8 +9,8 @@ import javax.persistence.*;
  * Created by Administrator on 2017/4/9.
  */
 @Entity
-@DiscriminatorValue("GroupMember")
-public class GroupMember extends Student {
+@DiscriminatorValue("Member")
+public class Member extends Student {
     @Basic
     @Column(name = "stuNumber", nullable = false)
     private String stuNumber;
@@ -19,13 +19,13 @@ public class GroupMember extends Student {
     @Column(name = "department")
     private String department;
 
-    @ManyToOne(targetEntity = GroupLeader.class)
+    @ManyToOne(targetEntity = Leader.class)
     @JoinColumns(value = {
             @JoinColumn(name = "leaderIDType", referencedColumnName = "idType"),
             @JoinColumn(name = "leaderIDNum", referencedColumnName = "idNum")
     })
     @Cascade(CascadeType.ALL)
-    private GroupLeader groupLeader;
+    private Leader leader;
 
     public String getStuNumber() {
         return stuNumber;
@@ -45,12 +45,12 @@ public class GroupMember extends Student {
     }
 
 
-    public GroupLeader getGroupLeader() {
-        return groupLeader;
+    public Leader getLeader() {
+        return leader;
     }
 
-    public void setGroupLeader(GroupLeader groupLeader) {
-        this.groupLeader = groupLeader;
+    public void setLeader(Leader leader) {
+        this.leader = leader;
     }
 
     @Override
@@ -58,11 +58,11 @@ public class GroupMember extends Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GroupMember groupMember = (GroupMember) o;
+        Member member = (Member) o;
 
-        if (stuNumber != null ? !stuNumber.equals(groupMember.stuNumber) : groupMember.stuNumber != null) return false;
-        if (department != null ? !department.equals(groupMember.department) : groupMember.department != null) return false;
-        if (groupLeader != null ? !groupLeader.equals(groupMember.groupLeader) : groupMember.groupLeader != null) return false;
+        if (stuNumber != null ? !stuNumber.equals(member.stuNumber) : member.stuNumber != null) return false;
+        if (department != null ? !department.equals(member.department) : member.department != null) return false;
+        if (leader != null ? !leader.equals(member.leader) : member.leader != null) return false;
         return super.equals(o);
     }
 
@@ -71,7 +71,7 @@ public class GroupMember extends Student {
         int result = super.hashCode();
         result = 31 * result + (stuNumber != null ? stuNumber.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
-        result = 31 * result + (groupLeader != null ? groupLeader.hashCode() : 0);
+        result = 31 * result + (leader != null ? leader.hashCode() : 0);
 
         return result;
     }

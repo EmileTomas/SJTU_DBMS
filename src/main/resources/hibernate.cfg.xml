@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:mysql://localhost:3306/learn</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/socialPractice</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="dialect">org.hibernate.dialect.MySQL57Dialect</property>
         <property name="connection.username">root</property>
@@ -12,8 +12,8 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
         <mapping class="DB_model.Student"/>
-        <mapping class="DB_model.GroupLeader"/>
-        <mapping class="DB_model.GroupMember"/>
+        <mapping class="DB_model.Leader"/>
+        <mapping class="DB_model.Member"/>
         <mapping class="DB_model.SpecialStudent"/>
 
         <!-- DB schema will be updated if needed -->

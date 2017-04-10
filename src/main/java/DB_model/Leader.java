@@ -6,8 +6,8 @@ import java.util.Set;
 
 
 @Entity
-@DiscriminatorValue("GroupLeader")
-public class GroupLeader extends Student {
+@DiscriminatorValue("Leader")
+public class Leader extends Student {
     @Basic
     @Column(name = "stuNumber")
     private String stuNumber;
@@ -17,11 +17,11 @@ public class GroupLeader extends Student {
     private String department;
 
 
-    @OneToMany(targetEntity = GroupMember.class, mappedBy = "groupLeader")
-    private Set<GroupMember> groupMembers = new HashSet<>();
+    @OneToMany(targetEntity = Member.class, mappedBy = "leader")
+    private Set<Member> members = new HashSet<>();
 
 
-    @OneToMany(targetEntity = SpecialStudent.class, mappedBy = "groupLeader")
+    @OneToMany(targetEntity = SpecialStudent.class, mappedBy = "leader")
     private Set<SpecialStudent> specialStudents = new HashSet<>();
 
     public String getStuNumber() {
@@ -40,12 +40,12 @@ public class GroupLeader extends Student {
         this.department = department;
     }
 
-    public Set<GroupMember> getGroupMembers() {
-        return groupMembers;
+    public Set<Member> getMembers() {
+        return members;
     }
 
-    public void setGroupMembers(Set<GroupMember> groupMembers) {
-        this.groupMembers = groupMembers;
+    public void setMembers(Set<Member> members) {
+        this.members = members;
     }
 
     public Set<SpecialStudent> getSpecialStudents() {
@@ -61,12 +61,12 @@ public class GroupLeader extends Student {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GroupLeader groupLeader = (GroupLeader) o;
+        Leader leader = (Leader) o;
 
-        if (stuNumber != null ? !stuNumber.equals(groupLeader.stuNumber) : groupLeader.stuNumber != null) return false;
-        if (department != null ? !department.equals(groupLeader.department) : groupLeader.department != null) return false;
-        if (groupMembers != null ? !groupMembers.equals(groupLeader.groupMembers) : groupLeader.groupMembers != null) return false;
-        if (specialStudents != null ? !specialStudents.equals(groupLeader.specialStudents) : groupLeader.specialStudents != null) return false;
+        if (stuNumber != null ? !stuNumber.equals(leader.stuNumber) : leader.stuNumber != null) return false;
+        if (department != null ? !department.equals(leader.department) : leader.department != null) return false;
+        if (members != null ? !members.equals(leader.members) : leader.members != null) return false;
+        if (specialStudents != null ? !specialStudents.equals(leader.specialStudents) : leader.specialStudents != null) return false;
         return super.equals(o);
     }
 
@@ -75,7 +75,7 @@ public class GroupLeader extends Student {
         int result = super.hashCode();
         result = 31 * result + (stuNumber != null ? stuNumber.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
-        result = 31 * result + (groupMembers != null ? groupMembers.hashCode() : 0);
+        result = 31 * result + (members != null ? members.hashCode() : 0);
         result = 31 * result + (specialStudents != null ? specialStudents.hashCode() : 0);
 
         return result;
