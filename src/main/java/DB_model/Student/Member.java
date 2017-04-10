@@ -1,4 +1,4 @@
-package DB_model;
+package DB_model.Student;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -35,7 +35,6 @@ public class Member extends Student {
         this.stuNumber = stuNumber;
     }
 
-
     public String getDepartment() {
         return department;
     }
@@ -43,7 +42,6 @@ public class Member extends Student {
     public void setDepartment(String department) {
         this.department = department;
     }
-
 
     public Leader getLeader() {
         return leader;
@@ -72,7 +70,6 @@ public class Member extends Student {
         result = 31 * result + (stuNumber != null ? stuNumber.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
         result = 31 * result + (leader != null ? leader.hashCode() : 0);
-
         return result;
     }
 

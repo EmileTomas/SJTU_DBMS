@@ -1,7 +1,9 @@
 package DAO;
 
-import DB_model.Member;
+import DB_model.Student.Member;
 import DB_model.ID_PK;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/9.
@@ -16,4 +18,6 @@ public interface MemberDao {
     public Member find(ID_PK memberID);
 
     public void update(Member member);
+
+    public List<Member> findAllMembers();
 }

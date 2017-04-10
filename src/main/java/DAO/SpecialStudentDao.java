@@ -1,7 +1,9 @@
 package DAO;
 
 import DB_model.ID_PK;
-import DB_model.SpecialStudent;
+import DB_model.Student.SpecialStudent;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/9.
@@ -16,4 +18,6 @@ public interface SpecialStudentDao {
     public SpecialStudent find(ID_PK specialStudentID);
 
     public void update(SpecialStudent specialStudent);
+
+    public List<SpecialStudent> findAllSpecialStudents();
 }

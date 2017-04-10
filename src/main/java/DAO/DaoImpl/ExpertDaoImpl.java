@@ -1,8 +1,8 @@
 package DAO.DaoImpl;
 
-import DAO.MemberDao;
+import DAO.ExpertDao;
 import DB_model.ID_PK;
-import DB_model.Student.Member;
+import DB_model.Teacher.Expert;
 import Util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -13,12 +13,12 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/4/10.
  */
-public class MemberDaoImpl implements MemberDao {
-    public void save(Member member) {
+public class ExpertDaoImpl implements ExpertDao {
+    public void save(Expert expert) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            session.save(member);
+            session.save(expert);
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -26,48 +26,43 @@ public class MemberDaoImpl implements MemberDao {
         }
     }
 
-    public void delete(ID_PK memberID) {
-        Member member = find(memberID);
-        if (member == null) System.out.println("Empty");
-        delete(member);
+    public void delete(ID_PK ExpertID) {
+        Expert expert = find(ExpertID);
+        if (expert != null)
+            delete(expert);
     }
 
-    public void delete(Member member) {
+    public void delete(Expert expert) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         session.beginTransaction();
-        session.delete(member);
+        session.delete(expert);
         session.getTransaction().commit();
-
     }
 
-    /**
-     * @param memberID
-     * @return if more than one instance matches LeaderID, throw exception
-     */
-    public Member find(ID_PK memberID) {
+    public Expert find(ID_PK ExpertID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Member member = null;
+        Expert expert = null;
         try {
             session.beginTransaction();
-            String hql = "from Member as members where members.id_pk.idType=? and members.id_pk.idNum=?";
+            String hql = "from Expert as expert where expert.id_pk.idType=? and expert.id_pk.idNum=?";
             Query query = session.createQuery(hql)
-                    .setParameter(0, memberID.getIdType())
-                    .setParameter(1, memberID.getIdNum());
-            member = (Member) query.uniqueResult();
+                    .setParameter(0, ExpertID.getIdType())
+                    .setParameter(1, ExpertID.getIdNum());
+            expert = (Expert) query.uniqueResult();
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();
             e.printStackTrace();
         }
-        return member;
+        return expert;
     }
 
-    public void update(Member member) {
+    public void update(Expert expert) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            session.update(member);
+            session.update(expert);
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -75,21 +70,19 @@ public class MemberDaoImpl implements MemberDao {
         }
     }
 
-
-    public List<Member> findAllMembers(){
+    public List<Expert> findAllExperts() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        List<Member> members = null;
+        List<Expert> experts = null;
         try {
             session.beginTransaction();
-            String hql = "from Member ";
+            String hql = "from Leader";
             Query query = session.createQuery(hql);
-            members= query.list();
+            experts= query.list();
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();
             e.printStackTrace();
         }
-        return members;
+        return experts;
     }
-
 }

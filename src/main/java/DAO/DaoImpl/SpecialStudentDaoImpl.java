@@ -2,11 +2,13 @@ package DAO.DaoImpl;
 
 import DAO.SpecialStudentDao;
 import DB_model.ID_PK;
-import DB_model.SpecialStudent;
+import DB_model.Student.SpecialStudent;
 import Util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/10.
@@ -51,7 +53,7 @@ public class SpecialStudentDaoImpl implements SpecialStudentDao {
         SpecialStudent specialStudent = null;
         try {
             session.beginTransaction();
-            String hql = "from SpecialStudent as spStu where spStu.id_PK.idType=? and spStu.id_PK.idNum=?";
+            String hql = "from SpecialStudent as spStu where spStu.id_pk.idType=? and spStu.id_pk.idNum=?";
             Query query = session.createQuery(hql)
                     .setParameter(0, specialStudentID.getIdType())
                     .setParameter(1, specialStudentID.getIdNum());
@@ -74,5 +76,22 @@ public class SpecialStudentDaoImpl implements SpecialStudentDao {
             session.getTransaction().rollback();
             e.printStackTrace();
         }
+    }
+
+
+    public List<SpecialStudent> findAllSpecialStudents(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        List<SpecialStudent> specialStudents = null;
+        try {
+            session.beginTransaction();
+            String hql = "from SpecialStudent ";
+            Query query = session.createQuery(hql);
+            specialStudents= query.list();
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return specialStudents;
     }
 }

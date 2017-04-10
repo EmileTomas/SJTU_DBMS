@@ -2,12 +2,13 @@ package DAO.DaoImpl;
 
 import DAO.LeaderDao;
 import DB_model.ID_PK;
-import DB_model.Leader;
+import DB_model.Student.Leader;
 import Util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/9.
@@ -49,7 +50,7 @@ public class LeaderDaoImpl implements LeaderDao {
         Leader leader = null;
         try {
             session.beginTransaction();
-            String hql = "from Leader as leader where leader.id_PK=? and leader.id_PK.idNum=?";
+            String hql = "from Leader as leader where leader.id_pk.idType=? and leader.id_pk.idNum=?";
             Query query = session.createQuery(hql)
                     .setParameter(0, leaderID.getIdType())
                     .setParameter(1, leaderID.getIdNum());
@@ -64,15 +65,30 @@ public class LeaderDaoImpl implements LeaderDao {
 
     public void update(Leader leader) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction transaction = null;
         try {
-            transaction = session.beginTransaction();
+            session.beginTransaction();
             session.update(leader);
-            transaction.commit();
+            session.getTransaction().commit();
         } catch (HibernateException e) {
-            transaction.rollback();
+            session.getTransaction().rollback();
             e.printStackTrace();
         }
+    }
+
+    public List<Leader> findAllLeaders(){
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        List<Leader> leaders = null;
+        try {
+            session.beginTransaction();
+            String hql = "from Leader";
+            Query query = session.createQuery(hql);
+            leaders= query.list();
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return leaders;
     }
 
 }

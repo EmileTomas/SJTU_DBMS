@@ -2,8 +2,8 @@ import DAO.DaoImpl.LeaderDaoImpl;
 import DAO.DaoImpl.MemberDaoImpl;
 import DAO.DaoImpl.SpecialStudentDaoImpl;
 import DB_model.*;
-import Util.HibernateUtil;
-import org.hibernate.*;
+import DB_model.Student.Leader;
+import DB_model.Student.Member;
 
 /**
  * Created by Administrator on 2017/4/4.

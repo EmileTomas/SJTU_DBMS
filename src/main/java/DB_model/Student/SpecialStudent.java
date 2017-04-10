@@ -1,4 +1,4 @@
-package DB_model;
+package DB_model.Student;
 
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
@@ -15,8 +15,8 @@ public class SpecialStudent extends Student {
     @ManyToOne(targetEntity = Leader.class)
     @JoinColumns(value = {
             @JoinColumn(name = "leaderIDType", referencedColumnName = "idType"),
-            @JoinColumn(name = "leaderIDNum", referencedColumnName = "idNum")
-    })
+            @JoinColumn(name = "leaderIDNum", referencedColumnName = "idNum")}
+            )
     @Cascade(CascadeType.SAVE_UPDATE)
     private Leader leader;
 
@@ -44,5 +44,4 @@ public class SpecialStudent extends Student {
         result = 31 * result + (leader != null ? leader.hashCode() : 0);
         return result;
     }
-
 }

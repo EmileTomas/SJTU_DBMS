@@ -1,4 +1,6 @@
-package DB_model;
+package DB_model.Student;
+
+import DB_model.ID_PK;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -12,7 +14,7 @@ import java.sql.Date;
 @DiscriminatorValue("NormalStudent")
 public class Student {
     @EmbeddedId
-    private ID_PK id_PK;
+    private ID_PK id_pk;
 
     @Basic
     @Column(name = "name")
@@ -38,11 +40,11 @@ public class Student {
     private Date birthday;
 
     public ID_PK getID_PK() {
-        return id_PK;
+        return id_pk;
     }
 
     public void setID_PK(ID_PK id_PK) {
-        this.id_PK = id_PK;
+        this.id_pk = id_PK;
     }
 
     public String getName() {
@@ -100,7 +102,7 @@ public class Student {
 
         Student student = (Student) o;
 
-        if (id_PK != null ? !id_PK.equals(student.id_PK) : student.id_PK != null) return false;
+        if (id_pk != null ? !id_pk.equals(student.id_pk) : student.id_pk != null) return false;
         if (name != null ? !name.equals(student.name) : student.name != null) return false;
         if (educationBg != null ? !educationBg.equals(student.educationBg) : student.educationBg != null) return false;
         if (phoneNum != null ? !phoneNum.equals(student.phoneNum) : student.phoneNum != null) return false;
@@ -113,7 +115,7 @@ public class Student {
 
     @Override
     public int hashCode() {
-        int result = id_PK != null ? id_PK.hashCode() : 0;
+        int result = id_pk != null ? id_pk.hashCode() : 0;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (educationBg != null ? educationBg.hashCode() : 0);
         result = 31 * result + (phoneNum != null ? phoneNum.hashCode() : 0);
