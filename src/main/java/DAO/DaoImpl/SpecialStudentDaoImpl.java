@@ -1,7 +1,7 @@
 package DAO.DaoImpl;
 
 import DAO.SpecialStudentDao;
-import DB_model.ID_PK;
+import DB_model.Id_PK;
 import DB_model.Student.SpecialStudent;
 import Util.HibernateUtil;
 import org.hibernate.HibernateException;
@@ -26,29 +26,27 @@ public class SpecialStudentDaoImpl implements SpecialStudentDao {
         }
     }
 
-    public void delete(ID_PK specialStudentID) {
+    public void delete(Id_PK specialStudentID) {
         SpecialStudent specialStudent = find(specialStudentID);
-        if (specialStudent != null)
-            delete(specialStudent);
-    }
-
-    public void delete(SpecialStudent specialStudent) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        try {
-            session.beginTransaction();
-            session.delete(specialStudent);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            session.getTransaction().rollback();
-            e.printStackTrace();
+        if (specialStudent != null){
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            try {
+                session.beginTransaction();
+                session.delete(specialStudent);
+                session.getTransaction().commit();
+            } catch (HibernateException e) {
+                session.getTransaction().rollback();
+                e.printStackTrace();
+            }
         }
     }
+
 
     /**
      * @param specialStudentID
      * @return if more than one instance matches LeaderID, throw exception
      */
-    public SpecialStudent find(ID_PK specialStudentID) {
+    public SpecialStudent find(Id_PK specialStudentID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         SpecialStudent specialStudent = null;
         try {

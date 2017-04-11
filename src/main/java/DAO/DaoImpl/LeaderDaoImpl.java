@@ -1,13 +1,16 @@
 package DAO.DaoImpl;
 
 import DAO.LeaderDao;
-import DB_model.ID_PK;
+import DB_model.Id_PK;
 import DB_model.Student.Leader;
+import DB_model.Student.Member;
 import Util.HibernateUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,26 +29,33 @@ public class LeaderDaoImpl implements LeaderDao {
         }
     }
 
-    public void delete(ID_PK leaderID) {
+    public void delete(Id_PK leaderID) {
         Leader leader = find(leaderID);
-        if (leader != null)
-            delete(leader);
+        if (leader != null) {
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+
+            //Clear the key in members
+            session.update(leader);                 //For lazy load
+            Hibernate.initialize(leader.getMembers());
+            List<Member> members = new ArrayList<Member>(leader.getMembers());
+            if (members.size() != 0) {
+                for (Member member : members) {
+                    member.setLeader(null);
+                    session.update(member);
+                }
+            }
+
+            session.delete(leader);
+            session.getTransaction().commit();
+        }
     }
-
-    public void delete(Leader leader) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        session.beginTransaction();
-        session.delete(leader);
-        session.getTransaction().commit();
-    }
-
 
     /**
      * @param leaderID
      * @return if more than one instance matches LeaderID, throw exception
      */
-    public Leader find(ID_PK leaderID) {
+    public Leader find(Id_PK leaderID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Leader leader = null;
         try {
@@ -75,14 +85,14 @@ public class LeaderDaoImpl implements LeaderDao {
         }
     }
 
-    public List<Leader> findAllLeaders(){
+    public List<Leader> findAllLeaders() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         List<Leader> leaders = null;
         try {
             session.beginTransaction();
             String hql = "from Leader";
             Query query = session.createQuery(hql);
-            leaders= query.list();
+            leaders = query.list();
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();

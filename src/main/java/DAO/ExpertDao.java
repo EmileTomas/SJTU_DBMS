@@ -1,7 +1,6 @@
 package DAO;
 
-import DB_model.ID_PK;
-import DB_model.Student.Leader;
+import DB_model.Id_PK;
 import DB_model.Teacher.Expert;
 
 import java.util.List;
@@ -12,11 +11,9 @@ import java.util.List;
 public interface ExpertDao {
     public void save(Expert expert);
 
-    public void delete(ID_PK ExpertID);
+    public void delete(Id_PK ExpertID);
 
-    public void delete(Expert expert);
-
-    public Expert find(ID_PK ExpertID);
+    public Expert find(Id_PK ExpertID);
 
     public void update(Expert expert);
 

@@ -7,12 +7,12 @@ import java.io.Serializable;
  * Created by Administrator on 2017/4/9.
  */
 @Embeddable
-public class ID_PK implements Serializable {
+public class Id_PK implements Serializable {
     private String idType;
     private String idNum;
 
-    public ID_PK(){}
-    public ID_PK(String idType,String idNum){
+    public Id_PK(){}
+    public Id_PK(String idType, String idNum){
         this.idType=idType;
         this.idNum=idNum;
     }
@@ -38,7 +38,7 @@ public class ID_PK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ID_PK ID = (ID_PK) o;
+        Id_PK ID = (Id_PK) o;
 
         if (idType != null ? !idType.equals(ID.idType) : ID.idType != null) return false;
         if (idNum != null ? !idNum.equals(ID.idNum) : ID.idNum != null) return false;

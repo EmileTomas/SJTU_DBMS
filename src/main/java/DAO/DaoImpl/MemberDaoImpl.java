@@ -1,7 +1,7 @@
 package DAO.DaoImpl;
 
 import DAO.MemberDao;
-import DB_model.ID_PK;
+import DB_model.Id_PK;
 import DB_model.Student.Member;
 import Util.HibernateUtil;
 import org.hibernate.HibernateException;
@@ -26,26 +26,22 @@ public class MemberDaoImpl implements MemberDao {
         }
     }
 
-    public void delete(ID_PK memberID) {
+    public void delete(Id_PK memberID) {
         Member member = find(memberID);
-        if (member == null) System.out.println("Empty");
-        delete(member);
+        if (member != null){
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+            session.delete(member);
+            session.getTransaction().commit();
+        }
     }
 
-    public void delete(Member member) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-
-        session.beginTransaction();
-        session.delete(member);
-        session.getTransaction().commit();
-
-    }
 
     /**
      * @param memberID
      * @return if more than one instance matches LeaderID, throw exception
      */
-    public Member find(ID_PK memberID) {
+    public Member find(Id_PK memberID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Member member = null;
         try {

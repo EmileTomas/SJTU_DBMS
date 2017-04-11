@@ -1,19 +1,22 @@
 package DAO.DaoImpl;
 
 import DAO.InstructorDao;
-import DB_model.ID_PK;
+import DB_model.Id_PK;
+import DB_model.Student.Leader;
 import DB_model.Teacher.Instructor;
 import Util.HibernateUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/10.
  */
-public class InstructorDaoImpl implements InstructorDao{
+public class InstructorDaoImpl implements InstructorDao {
     public void save(Instructor instructor) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
@@ -26,21 +29,32 @@ public class InstructorDaoImpl implements InstructorDao{
         }
     }
 
-    public void delete(ID_PK instructorID) {
+    public void delete(Id_PK instructorID) {
         Instructor instructor = find(instructorID);
-        if (instructor != null)
-            delete(instructor);
+
+        if (instructor != null) {
+
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+
+            //Clear the key in leaders
+            session.update(instructor);                 //For lazy load
+            Hibernate.initialize(instructor.getLeaders());
+            List<Leader> leaders = new ArrayList<Leader>(instructor.getLeaders());
+            if (leaders.size() != 0) {
+                for (Leader leader : leaders) {
+                    leader.setInstructor(null);
+                    session.update(leader);
+                }
+            }
+
+            session.delete(instructor);
+            session.getTransaction().commit();
+        }
     }
 
-    public void delete(Instructor instructor) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-        session.beginTransaction();
-        session.delete(instructor);
-        session.getTransaction().commit();
-    }
-
-    public Instructor find(ID_PK instructorID) {
+    public Instructor find(Id_PK instructorID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Instructor instructor = null;
         try {
@@ -77,7 +91,7 @@ public class InstructorDaoImpl implements InstructorDao{
             session.beginTransaction();
             String hql = "from Leader";
             Query query = session.createQuery(hql);
-            instructors= query.list();
+            instructors = query.list();
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();

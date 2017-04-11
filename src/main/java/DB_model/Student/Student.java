@@ -1,6 +1,6 @@
 package DB_model.Student;
 
-import DB_model.ID_PK;
+import DB_model.Id_PK;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -11,10 +11,11 @@ import java.sql.Date;
 @Entity
 @DiscriminatorColumn(name="studentType",
     discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @DiscriminatorValue("NormalStudent")
 public class Student {
     @EmbeddedId
-    private ID_PK id_pk;
+    private Id_PK id_pk;
 
     @Basic
     @Column(name = "name")
@@ -23,6 +24,7 @@ public class Student {
     @Basic
     @Column(name = "educationBg")
     private String educationBg;
+
     @Basic
     @Column(name = "phoneNum")
     private String phoneNum;
@@ -39,11 +41,11 @@ public class Student {
     @Column(name = "birthday")
     private Date birthday;
 
-    public ID_PK getID_PK() {
+    public Id_PK getID_PK() {
         return id_pk;
     }
 
-    public void setID_PK(ID_PK id_PK) {
+    public void setID_PK(Id_PK id_PK) {
         this.id_pk = id_PK;
     }
 

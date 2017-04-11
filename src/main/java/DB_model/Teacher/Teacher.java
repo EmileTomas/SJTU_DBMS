@@ -1,6 +1,6 @@
 package DB_model.Teacher;
 
-import DB_model.ID_PK;
+import DB_model.Id_PK;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -15,7 +15,7 @@ import java.sql.Date;
 public class Teacher {
 
     @EmbeddedId
-    private ID_PK id_pk;
+    private Id_PK id_pk;
 
     @Basic
     @Column(name = "teacherNum")
@@ -40,11 +40,11 @@ public class Teacher {
     private Date birthday;
 
 
-    public ID_PK getId_pk() {
+    public Id_PK getId_pk() {
         return id_pk;
     }
 
-    public void setId_pk(ID_PK id_pk) {
+    public void setId_pk(Id_PK id_pk) {
         this.id_pk = id_pk;
     }
 
