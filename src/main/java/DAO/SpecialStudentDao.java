@@ -15,5 +15,7 @@ public interface SpecialStudentDao {
 
     public void update(SpecialStudent specialStudent);
 
+    public SpecialStudent find(Id_PK specialStudentID);
+
     public List<SpecialStudent> findAllSpecialStudents();
 }

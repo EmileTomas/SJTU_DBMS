@@ -69,6 +69,8 @@ public class Member extends Student {
         int result = super.hashCode();
         result = 31 * result + (stuNumber != null ? stuNumber.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
+        result = 31 * result + (leader != null ? leader.hashCode() : 0);
+
         return result;
     }
 
