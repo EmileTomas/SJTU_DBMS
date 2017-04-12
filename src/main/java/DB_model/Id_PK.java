@@ -1,5 +1,6 @@
 package DB_model;
 
+import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
@@ -11,10 +12,12 @@ public class Id_PK implements Serializable {
     private String idType;
     private String idNum;
 
-    public Id_PK(){}
-    public Id_PK(String idType, String idNum){
-        this.idType=idType;
-        this.idNum=idNum;
+    public Id_PK() {
+    }
+
+    public Id_PK(String idType, String idNum) {
+        this.idType = idType;
+        this.idNum = idNum;
     }
 
     public String getIdType() {

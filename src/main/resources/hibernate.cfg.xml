@@ -27,7 +27,6 @@
         <mapping class="DB_model.Teacher.Expert"/>
         <mapping class="DB_model.Student.Student"/>
 
-
         <!-- DB schema will be updated if needed -->
 
     </session-factory>

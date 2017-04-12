@@ -1,8 +1,11 @@
 package DB_model.Student;
 
 import DB_model.Id_PK;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.sql.Date;
 
 /**
@@ -40,6 +43,16 @@ public class Student {
     @Basic
     @Column(name = "birthday")
     private Date birthday;
+
+    private Grade grade;
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
 
     public Id_PK getID_PK() {
         return id_pk;
@@ -111,6 +124,8 @@ public class Student {
         if (email != null ? !email.equals(student.email) : student.email != null) return false;
         if (birthday != null ? !birthday.equals(student.birthday) : student.birthday != null) return false;
         if (school != null ? !school.equals(student.school) : student.school != null) return false;
+        if (grade != null ? !grade.equals(student.school) : student.grade != null) return false;
+
 
         return true;
     }
@@ -124,6 +139,7 @@ public class Student {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (school != null ? school.hashCode() : 0);
+        result = 31 * result + (grade != null ? grade.hashCode() : 0);
 
         return result;
     }
