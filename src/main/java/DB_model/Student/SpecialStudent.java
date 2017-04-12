@@ -31,11 +31,12 @@ public class SpecialStudent extends Student {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof SpecialStudent)) return false;
+        if (!super.equals(o)) return false;
 
-        SpecialStudent specialStudent = (SpecialStudent) o;
-        if (leader != null ? !leader.equals(specialStudent.leader) : specialStudent.leader != null) return false;
-        return super.equals(o);
+        SpecialStudent that = (SpecialStudent) o;
+
+        return leader != null ? leader.equals(that.leader) : that.leader == null;
     }
 
     @Override

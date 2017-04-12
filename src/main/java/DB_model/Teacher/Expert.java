@@ -4,9 +4,8 @@ package DB_model.Teacher;
  * Created by Administrator on 2017/4/10.
  */
 
-import DB_model.Student.Leader;
+import DB_model.Team.Team;
 
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -15,29 +14,34 @@ import java.util.Set;
 
 @Entity
 @DiscriminatorValue("Expert")
-public class Expert extends Teacher {
+public class Expert extends Teacher{
 
-    @OneToMany(targetEntity = Leader.class, mappedBy = "expert")
-    private Set<Leader> leaders = new HashSet<>();
+    @OneToMany(targetEntity = Team.class, mappedBy = "instructor")
+    private Set<Team> teams = new HashSet<>();
 
-    public Set<Leader> getLeaders() {
-        return leaders;
+    public Set<Team> getTeams() {
+        return teams;
     }
 
-    public void setLeaders(Set<Leader> leaders) {
-        this.leaders = leaders;
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Expert)) return false;
+        if (!super.equals(o)) return false;
 
-        return super.equals(o);
+        Expert expert = (Expert) o;
+
+        return teams != null ? teams.equals(expert.teams) : expert.teams == null;
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        int result = super.hashCode();
+        result = 31 * result + (teams != null ? teams.hashCode() : 0);
+        return result;
     }
 }

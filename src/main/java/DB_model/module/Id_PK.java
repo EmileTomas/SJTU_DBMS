@@ -1,6 +1,5 @@
-package DB_model;
+package DB_model.module;
 
-import javax.persistence.Basic;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 

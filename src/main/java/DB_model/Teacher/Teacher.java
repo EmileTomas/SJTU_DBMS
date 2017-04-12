@@ -1,6 +1,6 @@
 package DB_model.Teacher;
 
-import DB_model.Id_PK;
+import DB_model.module.Id_PK;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -13,28 +13,33 @@ import java.sql.Date;
         discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("NormalTeacher")
 public class Teacher {
-
     @EmbeddedId
     private Id_PK id_pk;
 
     @Basic
     @Column(name = "teacherNum")
     private String teacherNum;
+
     @Basic
     @Column(name = "name")
     private String name;
+
     @Basic
     @Column(name = "jobTitle")
     private String jobTitle;
+
     @Basic
     @Column(name = "department")
     private String department;
+
     @Basic
     @Column(name = "phoneNum")
     private String phoneNum;
+
     @Basic
     @Column(name = "email")
     private String email;
+
     @Basic
     @Column(name = "birthday")
     private Date birthday;
@@ -109,7 +114,7 @@ public class Teacher {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Teacher)) return false;
 
         Teacher teacher = (Teacher) o;
 
@@ -120,9 +125,7 @@ public class Teacher {
         if (department != null ? !department.equals(teacher.department) : teacher.department != null) return false;
         if (phoneNum != null ? !phoneNum.equals(teacher.phoneNum) : teacher.phoneNum != null) return false;
         if (email != null ? !email.equals(teacher.email) : teacher.email != null) return false;
-        if (birthday != null ? !birthday.equals(teacher.birthday) : teacher.birthday != null) return false;
-
-        return true;
+        return birthday != null ? birthday.equals(teacher.birthday) : teacher.birthday == null;
     }
 
     @Override
@@ -137,4 +140,5 @@ public class Teacher {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         return result;
     }
+
 }

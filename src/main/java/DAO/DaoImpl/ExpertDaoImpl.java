@@ -1,8 +1,8 @@
 package DAO.DaoImpl;
 
 import DAO.ExpertDao;
-import DB_model.Id_PK;
-import DB_model.Student.Leader;
+import DB_model.Team.Team;
+import DB_model.module.Id_PK;
 import DB_model.Teacher.Expert;
 import Util.HibernateUtil;
 import org.hibernate.Hibernate;
@@ -39,12 +39,13 @@ public class ExpertDaoImpl implements ExpertDao {
 
             //Clear the key in leaders
             session.update(expert);                 //For lazy load
-            Hibernate.initialize(expert.getLeaders());
-            List<Leader> leaders = new ArrayList<Leader>(expert.getLeaders());
-            if (leaders.size() != 0) {
-                for (Leader leader : leaders) {
-                    leader.setExpert(null);
-                    session.update(leader);
+
+            Hibernate.initialize(expert.getTeams());
+            List<Team> teams = new ArrayList<Team>(expert.getTeams());
+            if (teams.size() != 0) {
+                for (Team team : teams) {
+                    team.setExpert(null);
+                    session.update(teams);
                 }
             }
 

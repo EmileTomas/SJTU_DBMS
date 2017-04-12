@@ -1,6 +1,6 @@
 package DB_model.Teacher;
 
-import DB_model.Student.Leader;
+import DB_model.Team.Team;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -14,27 +14,32 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("Instructor")
 public class Instructor extends Teacher {
-    @OneToMany(targetEntity = Leader.class, mappedBy = "instructor")
-    private Set<Leader> leaders = new HashSet<>();
+    @OneToMany(targetEntity = Team.class, mappedBy = "instructor")
+    private Set<Team> teams = new HashSet<>();
 
-    public Set<Leader> getLeaders() {
-        return leaders;
+    public Set<Team> getTeams() {
+        return teams;
     }
 
-    public void setLeaders(Set<Leader> leaders) {
-        this.leaders = leaders;
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        return super.equals(o);
-    }
+        if (!(o instanceof Instructor)) return false;
+        if (!super.equals(o)) return false;
 
+        Instructor that = (Instructor) o;
+
+        return teams != null ? teams.equals(that.teams) : that.teams == null;
+    }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        int result = super.hashCode();
+        result = 31 * result + (teams != null ? teams.hashCode() : 0);
+        return result;
     }
 }

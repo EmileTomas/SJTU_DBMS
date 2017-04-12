@@ -1,4 +1,4 @@
-package DB_model.Student;
+package DB_model.Student.module;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

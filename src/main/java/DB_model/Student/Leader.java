@@ -1,7 +1,6 @@
 package DB_model.Student;
 
-import DB_model.Teacher.Expert;
-import DB_model.Teacher.Instructor;
+import DB_model.Team.Team;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
 
@@ -28,22 +27,9 @@ public class Leader extends Student {
     @OneToMany(targetEntity = SpecialStudent.class, mappedBy = "leader")
     private Set<SpecialStudent> specialStudents = new HashSet<>();
 
-    @ManyToOne(targetEntity = Instructor.class)
-    @JoinColumns(value = {
-            @JoinColumn(name = "InstructorIDType", referencedColumnName = "idType"),
-            @JoinColumn(name = "InstructorIDNum", referencedColumnName = "idNum")
-    })
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Instructor instructor;
-
-    @ManyToOne(targetEntity = Expert.class)
-    @JoinColumns(value = {
-            @JoinColumn(name = "ExpertIDType", referencedColumnName = "idType"),
-            @JoinColumn(name = "ExpertIDNum", referencedColumnName = "idNum")
-    })
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Expert expert;
-
+    @OneToOne(targetEntity = Team.class,mappedBy = "leader")
+    @Cascade(CascadeType.ALL)
+    private Team team;
 
     public String getStuNumber() {
         return stuNumber;
@@ -77,35 +63,28 @@ public class Leader extends Student {
         this.specialStudents = specialStudents;
     }
 
-    public Instructor getInstructor() {
-        return instructor;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setInstructor(Instructor instructor) {
-        this.instructor = instructor;
-    }
-
-    public Expert getExpert() {
-        return expert;
-    }
-
-    public void setExpert(Expert expert) {
-        this.expert = expert;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Leader)) return false;
+        if (!super.equals(o)) return false;
 
         Leader leader = (Leader) o;
 
         if (stuNumber != null ? !stuNumber.equals(leader.stuNumber) : leader.stuNumber != null) return false;
         if (department != null ? !department.equals(leader.department) : leader.department != null) return false;
-        if (instructor != null ? !instructor.equals(leader.instructor) : leader.instructor != null) return false;
-        if (expert != null ? !expert.equals(leader.expert) : leader.expert != null) return false;
-
-        return super.equals(o);
+        if (members != null ? !members.equals(leader.members) : leader.members != null) return false;
+        if (specialStudents != null ? !specialStudents.equals(leader.specialStudents) : leader.specialStudents != null)
+            return false;
+        return team != null ? team.equals(leader.team) : leader.team == null;
     }
 
     @Override
@@ -113,10 +92,9 @@ public class Leader extends Student {
         int result = super.hashCode();
         result = 31 * result + (stuNumber != null ? stuNumber.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
-        result = 31 * result + (instructor != null ? instructor.hashCode() : 0);
-        result = 31 * result + (expert != null ? expert.hashCode() : 0);
-
+        result = 31 * result + (members != null ? members.hashCode() : 0);
+        result = 31 * result + (specialStudents != null ? specialStudents.hashCode() : 0);
+        result = 31 * result + (team != null ? team.hashCode() : 0);
         return result;
     }
-
 }

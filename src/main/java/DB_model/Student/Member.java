@@ -54,14 +54,14 @@ public class Member extends Student {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Member)) return false;
+        if (!super.equals(o)) return false;
 
         Member member = (Member) o;
 
         if (stuNumber != null ? !stuNumber.equals(member.stuNumber) : member.stuNumber != null) return false;
         if (department != null ? !department.equals(member.department) : member.department != null) return false;
-        if (leader != null ? !leader.equals(member.leader) : member.leader != null) return false;
-        return super.equals(o);
+        return leader != null ? leader.equals(member.leader) : member.leader == null;
     }
 
     @Override
@@ -70,8 +70,6 @@ public class Member extends Student {
         result = 31 * result + (stuNumber != null ? stuNumber.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
         result = 31 * result + (leader != null ? leader.hashCode() : 0);
-
         return result;
     }
-
 }

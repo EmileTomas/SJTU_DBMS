@@ -1,7 +1,7 @@
 package DAO.DaoImpl;
 
 import DAO.SpecialStudentDao;
-import DB_model.Id_PK;
+import DB_model.module.Id_PK;
 import DB_model.Student.SpecialStudent;
 import Util.HibernateUtil;
 import org.hibernate.HibernateException;

@@ -1,17 +1,8 @@
 import DAO.DaoImpl.*;
-import DAO.ExpertDao;
-import DAO.LeaderDao;
-import DB_model.*;
 import DB_model.Student.Leader;
 import DB_model.Student.Member;
+import DB_model.module.Id_PK;
 import DB_model.Teacher.Expert;
-import Util.HibernateUtil;
-import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Administrator on 2017/4/4.
@@ -27,21 +18,21 @@ public class Main {
 
         Leader leader1=new Leader();
         leader1.setStuNumber("99999999");
-        leader1.setID_PK(new Id_PK("TBZ","000000000"));
+        leader1.setId_pk(new Id_PK("TBZ","000000000"));
 
 
         Leader leader2=new Leader();
         leader2.setStuNumber("22222222");
-        leader2.setID_PK(new Id_PK("TBZ","12507478"));
+        leader2.setId_pk(new Id_PK("TBZ","12507478"));
 
         Member member1=new Member();
         member1.setStuNumber("5140309349");
-        member1.setID_PK(new Id_PK("SFZ","362321199"));
+        member1.setId_pk(new Id_PK("SFZ","362321199"));
 
 
         Member member2=new Member();
         member2.setStuNumber("5140309300");
-        member2.setID_PK(new Id_PK("SFZ","36232116699"));
+        member2.setId_pk(new Id_PK("SFZ","36232116699"));
 
         Expert expert1=new Expert();
         expert1.setTeacherNum("T11111");
@@ -52,6 +43,7 @@ public class Main {
         expert2.setId_pk(new Id_PK("SFZ","154646"));
 
         leaderDao.save(leader1);
+        expertDao.save(expert1);
         /**
          * Teacher and Instructor test
 

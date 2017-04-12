@@ -1,7 +1,8 @@
 package DAO.DaoImpl;
 
 import DAO.LeaderDao;
-import DB_model.Id_PK;
+import DB_model.Student.SpecialStudent;
+import DB_model.module.Id_PK;
 import DB_model.Student.Leader;
 import DB_model.Student.Member;
 import Util.HibernateUtil;
@@ -37,12 +38,22 @@ public class LeaderDaoImpl implements LeaderDao {
 
             //Clear the key in members
             session.update(leader);                 //For lazy load
+
             Hibernate.initialize(leader.getMembers());
             List<Member> members = new ArrayList<Member>(leader.getMembers());
             if (members.size() != 0) {
                 for (Member member : members) {
                     member.setLeader(null);
                     session.update(member);
+                }
+            }
+
+            Hibernate.initialize(leader.getMembers());
+            List<SpecialStudent> specialStudents = new ArrayList<SpecialStudent>(leader.getSpecialStudents());
+            if (specialStudents.size() != 0) {
+                for (SpecialStudent specialStudent : specialStudents) {
+                    specialStudent.setLeader(null);
+                    session.update(specialStudent);
                 }
             }
 

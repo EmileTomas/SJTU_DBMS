@@ -26,6 +26,7 @@
         <mapping class="DB_model.Teacher.Instructor"/>
         <mapping class="DB_model.Teacher.Expert"/>
         <mapping class="DB_model.Student.Student"/>
+        <mapping class="DB_model.Team.Team"/>
 
         <!-- DB schema will be updated if needed -->
 
