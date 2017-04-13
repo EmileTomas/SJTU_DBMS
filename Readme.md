@@ -18,22 +18,23 @@ The system will include three part in design: server part, website part and andr
 
 ### Relation List
 
-####Student - Leader
+**Student - Leader**
 
 | SrcEntity      | Relation                   | TargetEntity |
 | -------------- | -------------------------- | ------------ |
 | Member         | Bi-directional Many-To-One | Leader       |
 | SpecialStudent | Bi-directional Many-To-One | Leader       |
 
-####Leader - Team
+**Leader - Team**
 
 | SrcEntity | Relation                  | TargetEntity |
 | --------- | ------------------------- | ------------ |
 | Leader    | Bi-directional One-To-One | Team         |
 
-####Team - Teacher
+**Team - Teacher**
 
 | SrcEntity | Relation                   | TargetEntity |
 | --------- | -------------------------- | ------------ |
 | Team      | Bi-directional Many-To-One | Instructor   |
 | Team      | Bi-directional Many-To-One | Expert       |
+
