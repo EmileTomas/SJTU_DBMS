@@ -1,0 +1,211 @@
+/*!
+ * Start Bootstrap - Createive v4.0.0-alpha (http://startbootstrap.com/template-overviews/creative)
+ * Copyright 2013-2017 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-creative/blob/master/LICENSE)
+ */
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
+}
+
+
+hr {
+    border-color: #F05F40;
+    border-width: 3px;
+    max-width: 50px;
+}
+
+hr.light {
+    border-color: white;
+}
+
+
+.no-padding {
+    padding: 0;
+}
+
+::-moz-selection {
+    color: white;
+    text-shadow: none;
+    background: #222222;
+}
+
+::selection {
+    color: white;
+    text-shadow: none;
+    background: #222222;
+}
+
+body {
+    -webkit-tap-highlight-color: #222222;
+}
+
+#mainNav {
+    background-color: white;
+    border-color: rgba(34, 34, 34, 0.95);
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+#mainNav .navbar-brand {
+    color: #F05F40;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+#mainNav .navbar-brand:hover, #mainNav .navbar-brand:focus {
+    color: #f05f40;
+}
+
+
+
+@media (min-width: 992px) {
+    #mainNav {
+        background-color: transparent;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    #mainNav .navbar-brand {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    #mainNav .navbar-brand:hover, #mainNav .navbar-brand:focus {
+        color: white;
+    }
+
+
+    #mainNav.navbar-shrink {
+        background-color: white;
+        border-color: rgba(34, 34, 34, 0.05);
+    }
+
+    #mainNav.navbar-shrink .navbar-brand {
+        color: #F05F40;
+        font-size: 16px;
+    }
+}
+
+header.masthead {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-position: center;
+    background-image: url("src/img/bg3.jpg");
+    text-align: center;
+    color: white;
+}
+
+header.masthead .header-content {
+    position: relative;
+    text-align: center;
+    padding: 100px 15px 100px;
+    width: 100%;
+}
+
+header.masthead .header-content .header-content-inner h1 {
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 30px;
+}
+
+header.masthead .header-content .header-content-inner hr {
+    margin: 30px auto;
+}
+
+header.masthead .header-content .header-content-inner p {
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    margin-bottom: 50px;
+}
+
+@media (min-width: 768px) {
+    header.masthead {
+        height: 100%;
+        min-height: 600px;
+    }
+
+    header.masthead .header-content {
+        position: absolute;
+        top: 25%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        padding: 0 50px;
+    }
+
+    header.masthead .header-content .header-content-inner {
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    header.masthead .header-content .header-content-inner h1 {
+        font-size: 60px;
+    }
+
+    header.masthead .header-content .header-content-inner p {
+        font-size: 18px;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+
+.no-gutter > [class*='col-'] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+
+
+#mastfooter {
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width:100%;
+    height: 40px;
+    text-align: center;
+    font-size:12px;
+}
+
+.entry{
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 12px;
+}
+.entry .state {
+    color: #bfbfbf;
+}
+
+.entry a {
+    font-size: 12px;
+    color: #fff;
+    margin: 0 5px;
+}
+
+.entry a:hover {
+    color: #00bbee;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+}

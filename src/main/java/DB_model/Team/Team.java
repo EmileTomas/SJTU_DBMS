@@ -23,7 +23,7 @@ public class Team {
     private int teamID;
 
     @Basic
-    @Column(name = "teamIndex")
+    @Column(name = "teamIndex",unique = true)
     private int teamIndex;
 
     @Basic
