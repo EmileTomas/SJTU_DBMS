@@ -1,6 +1,5 @@
 package DAO;
 
-import DB_model.module.Id_PK;
 import DB_model.Student.Member;
 
 import java.util.List;
@@ -11,9 +10,9 @@ import java.util.List;
 public interface MemberDao {
     public void save(Member member);
 
-    public void delete(Id_PK memberID);
+    public void delete(int memberID);
 
-    public Member find(Id_PK memberID);
+    public Member find(int memberID);
 
     public void update(Member member);
 

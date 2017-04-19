@@ -1,10 +1,12 @@
 package DB_model.Student;
 
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by Administrator on 2017/4/9.
@@ -13,12 +15,12 @@ import javax.persistence.Entity;
 @DiscriminatorValue("SpecialStudent")
 public class SpecialStudent extends Student {
     @ManyToOne(targetEntity = Leader.class)
-    @JoinColumns(value = {
-            @JoinColumn(name = "leaderIDType", referencedColumnName = "idType"),
-            @JoinColumn(name = "leaderIDNum", referencedColumnName = "idNum")}
-            )
+    @JoinColumn(name = "leaderID", referencedColumnName = "stuID")
     @Cascade(CascadeType.SAVE_UPDATE)
     private Leader leader;
+
+    public SpecialStudent() {
+    }
 
     public Leader getLeader() {
         return leader;

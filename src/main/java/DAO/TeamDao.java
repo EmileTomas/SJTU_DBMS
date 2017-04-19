@@ -1,7 +1,8 @@
 package DAO;
 
 import DB_model.Student.Member;
-import DB_model.Team.Team;
+import DB_model.Team;
+
 import java.util.List;
 
 /**
@@ -10,18 +11,18 @@ import java.util.List;
 public interface TeamDao {
     public void save(Member member);
 
-    public void delete(int index);
+    public void delete(int teamID);
 
-    public Team findByTeamIndex(int index);
+    public Team find(int teamID);
 
     public void update(Team team);
 
-    public List<Team> findAllMTeams();
+    public List<Team> findAllTeams();
 
-    public List<Team> findAllKeyTeam();
+    public List<Team> findAllKeyTeams();
 
-    public List<Team> findAllNormalTeam();
+    public List<Team> findAllNormalTeams();
 
-    public List<Team> findAllApplyTeam();
+    public List<Team> findAllApplyTeams();
 
 }

@@ -4,7 +4,7 @@ package DB_model.Teacher;
  * Created by Administrator on 2017/4/10.
  */
 
-import DB_model.Team.Team;
+import DB_model.Team;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -14,10 +14,13 @@ import java.util.Set;
 
 @Entity
 @DiscriminatorValue("Expert")
-public class Expert extends Teacher{
+public class Expert extends Teacher {
 
     @OneToMany(targetEntity = Team.class, mappedBy = "instructor")
     private Set<Team> teams = new HashSet<>();
+
+    public Expert() {
+    }
 
     public Set<Team> getTeams() {
         return teams;

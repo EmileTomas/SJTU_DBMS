@@ -1,9 +1,8 @@
-package DAO.DaoImpl;
+package DAO.Impl;
 
-import DAO.ExpertDao;
-import DB_model.Team.Team;
-import DB_model.module.Id_PK;
-import DB_model.Teacher.Expert;
+import DAO.InstructorDao;
+import DB_model.Teacher.Instructor;
+import DB_model.Team;
 import Util.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -16,12 +15,12 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/4/10.
  */
-public class ExpertDaoImpl implements ExpertDao {
-    public void save(Expert expert) {
+public class InstructorDaoImpl implements InstructorDao {
+    public void save(Instructor instructor) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            session.save(expert);
+            session.save(instructor);
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -29,54 +28,23 @@ public class ExpertDaoImpl implements ExpertDao {
         }
     }
 
-    public void delete(Id_PK ExpertID) {
-        Expert expert = find(ExpertID);
-
-        if (expert != null) {
-
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+    public void delete(int instructorID) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try {
             session.beginTransaction();
 
-            //Clear the key in leaders
-            session.update(expert);                 //For lazy load
-
-            Hibernate.initialize(expert.getTeams());
-            List<Team> teams = new ArrayList<Team>(expert.getTeams());
-            if (teams.size() != 0) {
+            Instructor instructor = session.get(Instructor.class, instructorID);
+            if (instructor != null) {
+                Hibernate.initialize(instructor.getTeams());
+                List<Team> teams = new ArrayList<Team>(instructor.getTeams());
                 for (Team team : teams) {
-                    team.setExpert(null);
+                    team.setInstructor(null);
                     session.update(teams);
                 }
+                session.delete(instructor);
             }
+            //TODO Log Not Found Here
 
-            session.delete(expert);
-            session.getTransaction().commit();
-        }
-    }
-
-    public Expert find(Id_PK ExpertID) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Expert expert = null;
-        try {
-            session.beginTransaction();
-            String hql = "from Expert as expert where expert.id_pk.idType=? and expert.id_pk.idNum=?";
-            Query query = session.createQuery(hql)
-                    .setParameter(0, ExpertID.getIdType())
-                    .setParameter(1, ExpertID.getIdNum());
-            expert = (Expert) query.uniqueResult();
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            session.getTransaction().rollback();
-            e.printStackTrace();
-        }
-        return expert;
-    }
-
-    public void update(Expert expert) {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        try {
-            session.beginTransaction();
-            session.update(expert);
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();
@@ -84,19 +52,46 @@ public class ExpertDaoImpl implements ExpertDao {
         }
     }
 
-    public List<Expert> findAllExperts() {
+
+    public Instructor find(int instructorID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        List<Expert> experts = null;
+        Instructor instructor = null;
         try {
             session.beginTransaction();
-            String hql = "from Leader";
+            instructor = session.get(Instructor.class, instructorID);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+        return instructor;
+    }
+
+    public void update(Instructor instructor) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try {
+            session.beginTransaction();
+            session.update(instructor);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
+
+    public List<Instructor> findAllInstructors() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        List<Instructor> instructors = null;
+        try {
+            session.beginTransaction();
+            String hql = "from Instructor";
             Query query = session.createQuery(hql);
-            experts = query.list();
+            instructors = query.list();
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();
             e.printStackTrace();
         }
-        return experts;
+        return instructors;
     }
 }

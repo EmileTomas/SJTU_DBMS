@@ -1,6 +1,6 @@
 package DB_model.Teacher;
 
-import DB_model.Team.Team;
+import DB_model.Team;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -16,6 +16,9 @@ import java.util.Set;
 public class Instructor extends Teacher {
     @OneToMany(targetEntity = Team.class, mappedBy = "instructor")
     private Set<Team> teams = new HashSet<>();
+
+    public Instructor() {
+    }
 
     public Set<Team> getTeams() {
         return teams;

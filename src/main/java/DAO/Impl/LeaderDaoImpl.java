@@ -1,10 +1,9 @@
-package DAO.DaoImpl;
+package DAO.Impl;
 
 import DAO.LeaderDao;
-import DB_model.Student.SpecialStudent;
-import DB_model.module.Id_PK;
 import DB_model.Student.Leader;
 import DB_model.Student.Member;
+import DB_model.Student.SpecialStudent;
 import Util.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -30,52 +29,46 @@ public class LeaderDaoImpl implements LeaderDao {
         }
     }
 
-    public void delete(Id_PK leaderID) {
-        Leader leader = find(leaderID);
-        if (leader != null) {
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+    public void delete(int leaderID) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try {
             session.beginTransaction();
+            Leader leader = session.get(Leader.class, leaderID);
 
-            //Clear the key in members
-            session.update(leader);                 //For lazy load
-
-            Hibernate.initialize(leader.getMembers());
-            List<Member> members = new ArrayList<Member>(leader.getMembers());
-            if (members.size() != 0) {
+            if (leader != null) {
+                //Reset members foreign key
+                Hibernate.initialize(leader.getMembers());
+                List<Member> members = new ArrayList<Member>(leader.getMembers());
                 for (Member member : members) {
                     member.setLeader(null);
                     session.update(member);
-                }
-            }
 
-            Hibernate.initialize(leader.getMembers());
-            List<SpecialStudent> specialStudents = new ArrayList<SpecialStudent>(leader.getSpecialStudents());
-            if (specialStudents.size() != 0) {
+                }
+
+                //Reset members foreign key
+                Hibernate.initialize(leader.getSpecialStudents());
+                List<SpecialStudent> specialStudents = new ArrayList<SpecialStudent>(leader.getSpecialStudents());
                 for (SpecialStudent specialStudent : specialStudents) {
                     specialStudent.setLeader(null);
                     session.update(specialStudent);
                 }
+                session.delete(leader);
             }
+            //TODO LOG NOT FOUND
 
-            session.delete(leader);
             session.getTransaction().commit();
+        } catch (HibernateException e) {
+            session.getTransaction().rollback();
+            e.printStackTrace();
         }
     }
 
-    /**
-     * @param leaderID
-     * @return if more than one instance matches LeaderID, throw exception
-     */
-    public Leader find(Id_PK leaderID) {
+    public Leader find(int leaderID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Leader leader = null;
         try {
             session.beginTransaction();
-            String hql = "from Leader as leader where leader.id_pk.idType=? and leader.id_pk.idNum=?";
-            Query query = session.createQuery(hql)
-                    .setParameter(0, leaderID.getIdType())
-                    .setParameter(1, leaderID.getIdNum());
-            leader = (Leader) query.uniqueResult();
+            leader = session.get(Leader.class, leaderID);
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();

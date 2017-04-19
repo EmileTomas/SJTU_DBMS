@@ -1,9 +1,12 @@
 package DB_model.Student;
 
+import DB_model.Apply;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Administrator on 2017/4/9.
@@ -11,21 +14,28 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue("Member")
 public class Member extends Student {
-    @Basic
-    @Column(name = "stuNumber", nullable = false)
+    @Embedded
+    private Grade grade;
+
     private String stuNumber;
 
-    @Basic
-    @Column(name = "department")
     private String department;
 
     @ManyToOne(targetEntity = Leader.class)
-    @JoinColumns(value = {
-            @JoinColumn(name = "leaderIDType", referencedColumnName = "idType"),
-            @JoinColumn(name = "leaderIDNum", referencedColumnName = "idNum")
-    })
+    @JoinColumn(name = "leaderID", referencedColumnName = "stuID")
     @Cascade(CascadeType.SAVE_UPDATE)
     private Leader leader;
+
+    @OneToMany(targetEntity = Apply.class,mappedBy ="member")
+    private Set<Apply> applies=new HashSet<>();
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
 
     public String getStuNumber() {
         return stuNumber;
@@ -51,6 +61,14 @@ public class Member extends Student {
         this.leader = leader;
     }
 
+    public Set<Apply> getApplies() {
+        return applies;
+    }
+
+    public void setApplies(Set<Apply> applies) {
+        this.applies = applies;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -59,17 +77,21 @@ public class Member extends Student {
 
         Member member = (Member) o;
 
+        if (grade != null ? !grade.equals(member.grade) : member.grade != null) return false;
         if (stuNumber != null ? !stuNumber.equals(member.stuNumber) : member.stuNumber != null) return false;
         if (department != null ? !department.equals(member.department) : member.department != null) return false;
-        return leader != null ? leader.equals(member.leader) : member.leader == null;
+        if (leader != null ? !leader.equals(member.leader) : member.leader != null) return false;
+        return applies != null ? applies.equals(member.applies) : member.applies == null;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
+        result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (stuNumber != null ? stuNumber.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
         result = 31 * result + (leader != null ? leader.hashCode() : 0);
+        result = 31 * result + (applies != null ? applies.hashCode() : 0);
         return result;
     }
 }

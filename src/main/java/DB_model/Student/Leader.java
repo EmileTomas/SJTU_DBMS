@@ -1,35 +1,41 @@
 package DB_model.Student;
 
-import DB_model.Team.Team;
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
+import DB_model.Apply;
+import DB_model.Team;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @DiscriminatorValue("Leader")
 public class Leader extends Student {
-    @Basic
-    @Column(name = "stuNumber")
+    @Embedded
+    private Grade grade;
+
     private String stuNumber;
 
-    @Basic
-    @Column(name = "department")
     private String department;
 
     @OneToMany(targetEntity = Member.class, mappedBy = "leader")
     private Set<Member> members = new HashSet<>();
 
-
     @OneToMany(targetEntity = SpecialStudent.class, mappedBy = "leader")
     private Set<SpecialStudent> specialStudents = new HashSet<>();
 
+    @OneToMany(targetEntity = Apply.class,mappedBy = "leader")
+    private Set<Apply> applies=new HashSet<>();
+
     @OneToOne(targetEntity = Team.class,mappedBy = "leader")
-    @Cascade(CascadeType.ALL)
     private Team team;
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
 
     public String getStuNumber() {
         return stuNumber;
@@ -63,6 +69,14 @@ public class Leader extends Student {
         this.specialStudents = specialStudents;
     }
 
+    public Set<Apply> getApplies() {
+        return applies;
+    }
+
+    public void setApplies(Set<Apply> applies) {
+        this.applies = applies;
+    }
+
     public Team getTeam() {
         return team;
     }
@@ -79,22 +93,27 @@ public class Leader extends Student {
 
         Leader leader = (Leader) o;
 
+        if (grade != null ? !grade.equals(leader.grade) : leader.grade != null) return false;
         if (stuNumber != null ? !stuNumber.equals(leader.stuNumber) : leader.stuNumber != null) return false;
         if (department != null ? !department.equals(leader.department) : leader.department != null) return false;
         if (members != null ? !members.equals(leader.members) : leader.members != null) return false;
         if (specialStudents != null ? !specialStudents.equals(leader.specialStudents) : leader.specialStudents != null)
             return false;
+        if (applies != null ? !applies.equals(leader.applies) : leader.applies != null) return false;
         return team != null ? team.equals(leader.team) : leader.team == null;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
+        result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (stuNumber != null ? stuNumber.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
         result = 31 * result + (members != null ? members.hashCode() : 0);
         result = 31 * result + (specialStudents != null ? specialStudents.hashCode() : 0);
+        result = 31 * result + (applies != null ? applies.hashCode() : 0);
         result = 31 * result + (team != null ? team.hashCode() : 0);
         return result;
     }
 }
+

@@ -1,6 +1,6 @@
 package DB_model.Teacher;
 
-import DB_model.module.Id_PK;
+import DB_model.IDInfo;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -13,46 +13,45 @@ import java.sql.Date;
         discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("NormalTeacher")
 public class Teacher {
-    @EmbeddedId
-    private Id_PK id_pk;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int teacherId;
 
-    @Basic
-    @Column(name = "teacherNum")
+    private IDInfo idInfo;
+
     private String teacherNum;
 
-    @Basic
-    @Column(name = "name")
     private String name;
 
-    @Basic
-    @Column(name = "jobTitle")
     private String jobTitle;
 
-    @Basic
-    @Column(name = "department")
     private String department;
 
-    @Basic
-    @Column(name = "phoneNum")
     private String phoneNum;
 
-    @Basic
-    @Column(name = "email")
     private String email;
 
-    @Basic
-    @Column(name = "birthday")
     private Date birthday;
 
 
-    public Id_PK getId_pk() {
-        return id_pk;
+    public Teacher() {
     }
 
-    public void setId_pk(Id_PK id_pk) {
-        this.id_pk = id_pk;
+    public int getTeacherId() {
+        return teacherId;
     }
 
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
+    }
+
+    public IDInfo getIdInfo() {
+        return idInfo;
+    }
+
+    public void setIdInfo(IDInfo idInfo) {
+        this.idInfo = idInfo;
+    }
 
     public String getTeacherNum() {
         return teacherNum;
@@ -61,7 +60,6 @@ public class Teacher {
     public void setTeacherNum(String teacherNum) {
         this.teacherNum = teacherNum;
     }
-
 
     public String getName() {
         return name;
@@ -118,7 +116,7 @@ public class Teacher {
 
         Teacher teacher = (Teacher) o;
 
-        if (id_pk != null ? !id_pk.equals(teacher.id_pk) : teacher.id_pk != null) return false;
+        if (idInfo != null ? !idInfo.equals(teacher.idInfo) : teacher.idInfo != null) return false;
         if (teacherNum != null ? !teacherNum.equals(teacher.teacherNum) : teacher.teacherNum != null) return false;
         if (name != null ? !name.equals(teacher.name) : teacher.name != null) return false;
         if (jobTitle != null ? !jobTitle.equals(teacher.jobTitle) : teacher.jobTitle != null) return false;
@@ -130,7 +128,7 @@ public class Teacher {
 
     @Override
     public int hashCode() {
-        int result = id_pk != null ? id_pk.hashCode() : 0;
+        int result = idInfo != null ? idInfo.hashCode() : 0;
         result = 31 * result + (teacherNum != null ? teacherNum.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (jobTitle != null ? jobTitle.hashCode() : 0);
@@ -140,5 +138,4 @@ public class Teacher {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         return result;
     }
-
 }

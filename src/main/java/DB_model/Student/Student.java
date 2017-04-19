@@ -1,10 +1,8 @@
 package DB_model.Student;
 
-import DB_model.module.Id_PK;
-import DB_model.Student.module.Grade;
+import DB_model.IDInfo;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 import java.sql.Date;
 
 /**
@@ -13,44 +11,38 @@ import java.sql.Date;
 @Entity
 @DiscriminatorColumn(name="studentType",
     discriminatorType = DiscriminatorType.STRING)
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("NormalStudent")
 public class Student {
-    @EmbeddedId
-    private Id_PK id_pk;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int stuID;
 
-    @Basic
-    @Column(name = "name")
     private String name;
 
-    @Basic
-    @Column(name = "educationBg")
     private String educationBg;
 
-    @Basic
-    @Column(name = "phoneNum")
     private String phoneNum;
 
-    @Basic
-    @Column(name = "email")
     private String email;
 
-    @Basic
-    @Column(name="school")
     private String school;
 
-    @Basic
-    @Column(name = "birthday")
     private Date birthday;
 
-    private Grade grade;
+    @Embedded
+    private IDInfo IDInfo;
 
-    public Id_PK getId_pk() {
-        return id_pk;
+    public Student() {
     }
 
-    public void setId_pk(Id_PK id_pk) {
-        this.id_pk = id_pk;
+
+    public int getStuID() {
+        return stuID;
+    }
+
+    public void setStuID(int stuID) {
+        this.stuID = stuID;
     }
 
     public String getName() {
@@ -101,12 +93,12 @@ public class Student {
         this.birthday = birthday;
     }
 
-    public Grade getGrade() {
-        return grade;
+    public DB_model.IDInfo getIDInfo() {
+        return IDInfo;
     }
 
-    public void setGrade(Grade grade) {
-        this.grade = grade;
+    public void setIDInfo(DB_model.IDInfo IDInfo) {
+        this.IDInfo = IDInfo;
     }
 
     @Override
@@ -116,26 +108,24 @@ public class Student {
 
         Student student = (Student) o;
 
-        if (id_pk != null ? !id_pk.equals(student.id_pk) : student.id_pk != null) return false;
         if (name != null ? !name.equals(student.name) : student.name != null) return false;
         if (educationBg != null ? !educationBg.equals(student.educationBg) : student.educationBg != null) return false;
         if (phoneNum != null ? !phoneNum.equals(student.phoneNum) : student.phoneNum != null) return false;
         if (email != null ? !email.equals(student.email) : student.email != null) return false;
         if (school != null ? !school.equals(student.school) : student.school != null) return false;
         if (birthday != null ? !birthday.equals(student.birthday) : student.birthday != null) return false;
-        return grade != null ? grade.equals(student.grade) : student.grade == null;
+        return IDInfo != null ? IDInfo.equals(student.IDInfo) : student.IDInfo == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id_pk != null ? id_pk.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (educationBg != null ? educationBg.hashCode() : 0);
         result = 31 * result + (phoneNum != null ? phoneNum.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (school != null ? school.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        result = 31 * result + (grade != null ? grade.hashCode() : 0);
+        result = 31 * result + (IDInfo != null ? IDInfo.hashCode() : 0);
         return result;
     }
 }

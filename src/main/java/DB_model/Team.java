@@ -1,12 +1,12 @@
-package DB_model.Team;
+package DB_model;
 
 import DB_model.Student.Leader;
 import DB_model.Teacher.Expert;
 import DB_model.Teacher.Instructor;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 import java.sql.Date;
 
 /**
@@ -19,60 +19,40 @@ import java.sql.Date;
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "teamID")
     private int teamID;
 
-    @Basic
-    @Column(name = "teamIndex",unique = true)
     private int teamIndex;
 
-    @Basic
-    @Column(name = "teamName")
     private String teamName;
 
-    @Basic
-    @Column(name = "teamType")
     private String teamType;
 
-    @Basic
-    @Column(name = "practiceLocation")
     private String practiceLocation;
 
-    @Basic
-    @Column(name = "startTime")
     private Date startTime;
 
-    @Basic
-    @Column(name = "endTime")
     private Date endTime;
 
-    @Basic
-    @Column(name = "applyState")
     private String applyState="Waitting";
 
     @OneToOne(targetEntity = Leader.class)
-    @JoinColumns(value = {
-            @JoinColumn(name = "leaderIDType", referencedColumnName = "idType"),
-            @JoinColumn(name = "leaderIDNum", referencedColumnName = "idNum")
-    })
+    @JoinColumn(name = "leaderID", referencedColumnName = "stuID")
     private Leader leader;
 
     @ManyToOne(targetEntity = Instructor.class)
-    @JoinColumns(value = {
-            @JoinColumn(name = "InstructorIDType", referencedColumnName = "idType"),
-            @JoinColumn(name = "InstructorIDNum", referencedColumnName = "idNum")
-    })
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "InstructorID", referencedColumnName = "teacherID")
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Instructor instructor;
 
-
     @ManyToOne(targetEntity = Expert.class)
-    @JoinColumns(value = {
-            @JoinColumn(name = "ExpertIDType", referencedColumnName = "idType"),
-            @JoinColumn(name = "ExpertIDNum", referencedColumnName = "idNum")
-    })
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinColumn(name = "ExpertID", referencedColumnName = "teacherID")
+
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Expert expert;
+
+
+    public Team() {
+    }
 
 
     public int getTeamID() {
@@ -170,7 +150,6 @@ public class Team {
 
         Team team = (Team) o;
 
-        if (teamID != team.teamID) return false;
         if (teamIndex != team.teamIndex) return false;
         if (teamName != null ? !teamName.equals(team.teamName) : team.teamName != null) return false;
         if (teamType != null ? !teamType.equals(team.teamType) : team.teamType != null) return false;
@@ -186,8 +165,7 @@ public class Team {
 
     @Override
     public int hashCode() {
-        int result = teamID;
-        result = 31 * result + teamIndex;
+        int result = teamIndex;
         result = 31 * result + (teamName != null ? teamName.hashCode() : 0);
         result = 31 * result + (teamType != null ? teamType.hashCode() : 0);
         result = 31 * result + (practiceLocation != null ? practiceLocation.hashCode() : 0);
