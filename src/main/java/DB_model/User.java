@@ -18,6 +18,8 @@ public class User  {
 
     private String userType;
 
+    private int infoID;
+
     public int getUID() {
         return UID;
     }
@@ -41,6 +43,15 @@ public class User  {
     public void setUserType(String userType) {
         this.userType = userType;
     }
+
+    public int getInfoID() {
+        return infoID;
+    }
+
+    public void setInfoID(int infoID) {
+        this.infoID = infoID;
+    }
+
 
 
 }

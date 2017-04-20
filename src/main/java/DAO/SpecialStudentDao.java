@@ -10,11 +10,11 @@ import java.util.List;
 public interface SpecialStudentDao {
     public void save(SpecialStudent specialStudent);
 
-    public void delete(int specialStudentID);
+    public void delete(int stuID);
+
+    public SpecialStudent find(int stuID);
 
     public void update(SpecialStudent specialStudent);
-
-    public SpecialStudent find(int specialStudentID);
 
     public List<SpecialStudent> findAllSpecialStudents();
 }

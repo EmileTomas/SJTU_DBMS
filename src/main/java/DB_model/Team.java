@@ -46,7 +46,6 @@ public class Team {
 
     @ManyToOne(targetEntity = Expert.class)
     @JoinColumn(name = "ExpertID", referencedColumnName = "teacherID")
-
     @Cascade(CascadeType.SAVE_UPDATE)
     private Expert expert;
 
@@ -158,9 +157,9 @@ public class Team {
         if (startTime != null ? !startTime.equals(team.startTime) : team.startTime != null) return false;
         if (endTime != null ? !endTime.equals(team.endTime) : team.endTime != null) return false;
         if (applyState != null ? !applyState.equals(team.applyState) : team.applyState != null) return false;
-        if (leader != null ? !leader.equals(team.leader) : team.leader != null) return false;
-        if (instructor != null ? !instructor.equals(team.instructor) : team.instructor != null) return false;
-        return expert != null ? expert.equals(team.expert) : team.expert == null;
+        if (leader != null ? !(leader.getStuID()==team.leader.getStuID()) : team.leader != null) return false;
+        if (instructor != null ? !(instructor.getTeacherId()==team.instructor.getTeacherId()) : team.instructor != null) return false;
+        return expert != null ? (expert.getTeacherId()==team.expert.getTeacherId()) : team.expert == null;
     }
 
     @Override
@@ -172,9 +171,9 @@ public class Team {
         result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
         result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
         result = 31 * result + (applyState != null ? applyState.hashCode() : 0);
-        result = 31 * result + (leader != null ? leader.hashCode() : 0);
-        result = 31 * result + (instructor != null ? instructor.hashCode() : 0);
-        result = 31 * result + (expert != null ? expert.hashCode() : 0);
+        result = 31 * result + (leader != null ? leader.getStuID() : 0);
+        result = 31 * result + (instructor != null ? instructor.getTeacherId() : 0);
+        result = 31 * result + (expert != null ? expert.getTeacherId() : 0);
         return result;
     }
 }

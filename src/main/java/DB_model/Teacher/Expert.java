@@ -30,21 +30,5 @@ public class Expert extends Teacher {
         this.teams = teams;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Expert)) return false;
-        if (!super.equals(o)) return false;
 
-        Expert expert = (Expert) o;
-
-        return teams != null ? teams.equals(expert.teams) : expert.teams == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (teams != null ? teams.hashCode() : 0);
-        return result;
-    }
 }

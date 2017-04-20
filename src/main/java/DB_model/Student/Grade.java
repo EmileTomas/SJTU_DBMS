@@ -1,5 +1,7 @@
 package DB_model.Student;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
@@ -8,14 +10,24 @@ import java.io.Serializable;
  */
 @Embeddable
 public class Grade implements Serializable {
+    @Basic
+    @Column(name="IntroClassGrade")
     private int introClassGrade;
 
+    @Basic
+    @Column(name="subPandectClass")
     private int subPandectClass;
 
+    @Basic
+    @Column(name="team")
     private int team;
 
+    @Basic
+    @Column(name="participation")
     private int participation;
 
+    @Basic
+    @Column(name="report")
     private int report;
 
     public Grade() { }

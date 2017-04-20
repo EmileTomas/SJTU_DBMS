@@ -10,9 +10,9 @@ import java.util.List;
 public interface MemberDao {
     public void save(Member member);
 
-    public void delete(int memberID);
+    public void delete(int stuID);
 
-    public Member find(int memberID);
+    public Member find(int stuID);
 
     public void update(Member member);
 

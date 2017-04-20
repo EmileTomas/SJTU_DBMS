@@ -38,13 +38,13 @@ public class SpecialStudent extends Student {
 
         SpecialStudent that = (SpecialStudent) o;
 
-        return leader != null ? leader.equals(that.leader) : that.leader == null;
+        return leader != null ? (leader.getStuID()==that.leader.getStuID()) : that.leader == null;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (leader != null ? leader.hashCode() : 0);
+        result = 31 * result + (leader != null ? leader.getStuID() : 0);
         return result;
     }
 }

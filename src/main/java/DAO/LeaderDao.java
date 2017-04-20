@@ -10,9 +10,9 @@ import java.util.List;
 public interface LeaderDao {
     public void save(Leader leader);
 
-    public void delete(int leaderID);
+    public void delete(int stuID);
 
-    public Leader find(int leaderID);
+    public Leader find(int stuID);
 
     public void update(Leader leader);
 

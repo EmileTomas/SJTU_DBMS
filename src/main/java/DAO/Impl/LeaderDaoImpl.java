@@ -29,15 +29,14 @@ public class LeaderDaoImpl implements LeaderDao {
         }
     }
 
-    public void delete(int leaderID) {
+    public void delete(int stuID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            Leader leader = session.get(Leader.class, leaderID);
+            Leader leader = session.get(Leader.class, stuID);
 
             if (leader != null) {
                 //Reset members foreign key
-                Hibernate.initialize(leader.getMembers());
                 List<Member> members = new ArrayList<Member>(leader.getMembers());
                 for (Member member : members) {
                     member.setLeader(null);
@@ -63,12 +62,12 @@ public class LeaderDaoImpl implements LeaderDao {
         }
     }
 
-    public Leader find(int leaderID) {
+    public Leader find(int stuID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Leader leader = null;
         try {
             session.beginTransaction();
-            leader = session.get(Leader.class, leaderID);
+            leader = session.get(Leader.class, stuID);
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();

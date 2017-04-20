@@ -25,11 +25,11 @@ public class MemberDaoImpl implements MemberDao {
         }
     }
 
-    public void delete(int memberID) {
+    public void delete(int stuID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            Member member = session.get(Member.class, memberID);
+            Member member = session.get(Member.class, stuID);
             if(member!=null)
                 session.delete(member);
             //TODO LOG NOT FOUND
@@ -42,12 +42,12 @@ public class MemberDaoImpl implements MemberDao {
 
     }
 
-    public Member find(int memberID) {
+    public Member find(int stuID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Member member = null;
         try {
             session.beginTransaction();
-            member = session.get(Member.class, memberID);
+            member = session.get(Member.class, stuID);
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();

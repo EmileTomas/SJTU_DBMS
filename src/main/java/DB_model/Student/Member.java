@@ -14,12 +14,12 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("Member")
 public class Member extends Student {
-    @Embedded
-    private Grade grade;
-
     private String stuNumber;
 
     private String department;
+
+    @Embedded
+    private Grade grade;
 
     @ManyToOne(targetEntity = Leader.class)
     @JoinColumn(name = "leaderID", referencedColumnName = "stuID")
@@ -77,21 +77,19 @@ public class Member extends Student {
 
         Member member = (Member) o;
 
-        if (grade != null ? !grade.equals(member.grade) : member.grade != null) return false;
         if (stuNumber != null ? !stuNumber.equals(member.stuNumber) : member.stuNumber != null) return false;
         if (department != null ? !department.equals(member.department) : member.department != null) return false;
-        if (leader != null ? !leader.equals(member.leader) : member.leader != null) return false;
-        return applies != null ? applies.equals(member.applies) : member.applies == null;
+        if (grade != null ? !grade.equals(member.grade) : member.grade != null) return false;
+        return leader != null ? (leader.getStuID()==member.leader.getStuID()) : member.leader == null;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (stuNumber != null ? stuNumber.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
-        result = 31 * result + (leader != null ? leader.hashCode() : 0);
-        result = 31 * result + (applies != null ? applies.hashCode() : 0);
+        result = 31 * result + (grade != null ? grade.hashCode() : 0);
+        result = 31 * result + (leader != null ? leader.getStuID() : 0);
         return result;
     }
 }

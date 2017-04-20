@@ -17,10 +17,12 @@
         <!-- For Development -->
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
+        <mapping class="DB_model.Student.Student"/>
         <mapping class="DB_model.Student.Leader"/>
         <mapping class="DB_model.Student.Member"/>
         <mapping class="DB_model.Student.SpecialStudent"/>
 
+        <mapping class="DB_model.Teacher.Teacher"/>
         <mapping class="DB_model.Teacher.Instructor"/>
         <mapping class="DB_model.Teacher.Expert"/>
 

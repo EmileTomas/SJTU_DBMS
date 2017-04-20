@@ -17,16 +17,17 @@ public class Apply {
     private int applyId;
 
     @ManyToOne(targetEntity = Member.class)
-    @JoinColumn(name = "memberID",referencedColumnName = "stuID")
+    @JoinColumn(name = "memberID", referencedColumnName = "stuID", nullable = false)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Member member;
 
     @ManyToOne(targetEntity = Leader.class)
-    @JoinColumn(name="leaderID",referencedColumnName = "stuID")
+    @JoinColumn(name = "leaderID", referencedColumnName = "stuID", nullable = false)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Leader leader;
 
-    private String state;
+    @Column(nullable = false)
+    private String state = "Waiting";
 
     public Apply() {
     }
@@ -34,6 +35,14 @@ public class Apply {
     public Apply(Member member, Leader leader) {
         this.member = member;
         this.leader = leader;
+    }
+
+    public int getApplyId() {
+        return applyId;
+    }
+
+    public void setApplyId(int applyId) {
+        this.applyId = applyId;
     }
 
     public Member getMember() {
@@ -67,16 +76,20 @@ public class Apply {
 
         Apply apply = (Apply) o;
 
-        if (member != null ? !member.equals(apply.member) : apply.member != null) return false;
-        if (leader != null ? !leader.equals(apply.leader) : apply.leader != null) return false;
-        return state != null ? state.equals(apply.state) : apply.state == null;
+        if (applyId != apply.applyId) return false;
+        if (state != apply.state) return false;
+        if (leader.getStuID() != apply.leader.getStuID()) return false;
+
+        return (member.getStuID() == apply.member.getStuID());
     }
 
     @Override
     public int hashCode() {
-        int result = member != null ? member.hashCode() : 0;
-        result = 31 * result + (leader != null ? leader.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
+        int result = applyId;
+        result = 31 * result + state.hashCode();
+        result = 31 * result + member.getStuID();
+        result = 31 * result + leader.getStuID();
+
         return result;
     }
 }

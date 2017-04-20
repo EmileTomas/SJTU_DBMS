@@ -96,11 +96,7 @@ public class Leader extends Student {
         if (grade != null ? !grade.equals(leader.grade) : leader.grade != null) return false;
         if (stuNumber != null ? !stuNumber.equals(leader.stuNumber) : leader.stuNumber != null) return false;
         if (department != null ? !department.equals(leader.department) : leader.department != null) return false;
-        if (members != null ? !members.equals(leader.members) : leader.members != null) return false;
-        if (specialStudents != null ? !specialStudents.equals(leader.specialStudents) : leader.specialStudents != null)
-            return false;
-        if (applies != null ? !applies.equals(leader.applies) : leader.applies != null) return false;
-        return team != null ? team.equals(leader.team) : leader.team == null;
+        return team != null ? (team.getTeamID()==leader.team.getTeamID()) : leader.team == null;
     }
 
     @Override
@@ -109,10 +105,7 @@ public class Leader extends Student {
         result = 31 * result + (grade != null ? grade.hashCode() : 0);
         result = 31 * result + (stuNumber != null ? stuNumber.hashCode() : 0);
         result = 31 * result + (department != null ? department.hashCode() : 0);
-        result = 31 * result + (members != null ? members.hashCode() : 0);
-        result = 31 * result + (specialStudents != null ? specialStudents.hashCode() : 0);
-        result = 31 * result + (applies != null ? applies.hashCode() : 0);
-        result = 31 * result + (team != null ? team.hashCode() : 0);
+        result = 31 * result + (team != null ? team.getTeamID() : 0);
         return result;
     }
 }

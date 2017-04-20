@@ -27,22 +27,4 @@ public class Instructor extends Teacher {
     public void setTeams(Set<Team> teams) {
         this.teams = teams;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Instructor)) return false;
-        if (!super.equals(o)) return false;
-
-        Instructor that = (Instructor) o;
-
-        return teams != null ? teams.equals(that.teams) : that.teams == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (teams != null ? teams.hashCode() : 0);
-        return result;
-    }
 }

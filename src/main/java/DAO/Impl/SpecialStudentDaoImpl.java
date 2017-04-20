@@ -25,11 +25,11 @@ public class SpecialStudentDaoImpl implements SpecialStudentDao {
         }
     }
 
-    public void delete(int specialStudentID) {
+    public void delete(int stuID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            SpecialStudent specialStudent = session.get(SpecialStudent.class, specialStudentID);
+            SpecialStudent specialStudent = session.get(SpecialStudent.class, stuID);
             if (specialStudent != null)
                 session.delete(specialStudent);
             //TODO LOG NOT FOUND
@@ -41,12 +41,12 @@ public class SpecialStudentDaoImpl implements SpecialStudentDao {
     }
 
 
-    public SpecialStudent find(int specialStudentID) {
+    public SpecialStudent find(int stuID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         SpecialStudent specialStudent = null;
         try {
             session.beginTransaction();
-            specialStudent = session.get(SpecialStudent.class, specialStudentID);
+            specialStudent = session.get(SpecialStudent.class, stuID);
             session.getTransaction().commit();
         } catch (HibernateException e) {
             session.getTransaction().rollback();
