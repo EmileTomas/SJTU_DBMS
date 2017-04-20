@@ -2,6 +2,7 @@ package DB_model;
 
 import DB_model.Student.Leader;
 import DB_model.Student.Member;
+import DB_model.Util.ApplyState;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -26,8 +27,8 @@ public class Apply {
     @Cascade(CascadeType.SAVE_UPDATE)
     private Leader leader;
 
-    @Column(nullable = false)
-    private String state = "Waiting";
+    @Enumerated(EnumType.STRING)
+    private ApplyState applyState = ApplyState.WAITING;
 
     public Apply() {
     }
@@ -41,32 +42,36 @@ public class Apply {
         return applyId;
     }
 
-    public void setApplyId(int applyId) {
+    public Apply setApplyId(int applyId) {
         this.applyId = applyId;
+        return this;
     }
 
     public Member getMember() {
         return member;
     }
 
-    public void setMember(Member member) {
+    public Apply setMember(Member member) {
         this.member = member;
+        return this;
     }
 
     public Leader getLeader() {
         return leader;
     }
 
-    public void setLeader(Leader leader) {
+    public Apply setLeader(Leader leader) {
         this.leader = leader;
+        return this;
     }
 
-    public String getState() {
-        return state;
+    public ApplyState getApplyState() {
+        return applyState;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public Apply setApplyState(ApplyState applyState) {
+        this.applyState = applyState;
+        return this;
     }
 
     @Override
@@ -77,7 +82,7 @@ public class Apply {
         Apply apply = (Apply) o;
 
         if (applyId != apply.applyId) return false;
-        if (state != apply.state) return false;
+        if (applyState != apply.applyState) return false;
         if (leader.getStuID() != apply.leader.getStuID()) return false;
 
         return (member.getStuID() == apply.member.getStuID());
@@ -86,7 +91,7 @@ public class Apply {
     @Override
     public int hashCode() {
         int result = applyId;
-        result = 31 * result + state.hashCode();
+        result = 31 * result + applyState.hashCode();
         result = 31 * result + member.getStuID();
         result = 31 * result + leader.getStuID();
 

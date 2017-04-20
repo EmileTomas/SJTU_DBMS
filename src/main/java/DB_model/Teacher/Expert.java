@@ -15,7 +15,6 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("Expert")
 public class Expert extends Teacher {
-
     @OneToMany(targetEntity = Team.class, mappedBy = "instructor")
     private Set<Team> teams = new HashSet<>();
 
@@ -26,9 +25,8 @@ public class Expert extends Teacher {
         return teams;
     }
 
-    public void setTeams(Set<Team> teams) {
+    public Expert setTeams(Set<Team> teams) {
         this.teams = teams;
+        return this;
     }
-
-
 }

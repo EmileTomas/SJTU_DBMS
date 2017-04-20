@@ -3,6 +3,8 @@ package DB_model;
 import DB_model.Student.Leader;
 import DB_model.Teacher.Expert;
 import DB_model.Teacher.Instructor;
+import DB_model.Util.ApplyState;
+import DB_model.Util.TeamType;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -21,11 +23,12 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int teamID;
 
-    private int teamIndex;
-
+    @Column(nullable = false,unique = true)
     private String teamName;
 
-    private String teamType;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TeamType teamType;
 
     private String practiceLocation;
 
@@ -33,7 +36,11 @@ public class Team {
 
     private Date endTime;
 
-    private String applyState="Waitting";
+    private int teamIndex;
+
+    @Enumerated(EnumType.STRING)
+    private ApplyState applyState=ApplyState.WAITING;
+
 
     @OneToOne(targetEntity = Leader.class)
     @JoinColumn(name = "leaderID", referencedColumnName = "stuID")
@@ -49,97 +56,103 @@ public class Team {
     @Cascade(CascadeType.SAVE_UPDATE)
     private Expert expert;
 
-
-    public Team() {
-    }
-
-
     public int getTeamID() {
         return teamID;
     }
 
-    public void setTeamID(int teamID) {
+    public Team setTeamID(int teamID) {
         this.teamID = teamID;
+        return this;
     }
 
     public int getTeamIndex() {
         return teamIndex;
     }
 
-    public void setTeamIndex(int teamIndex) {
+    public Team setTeamIndex(int teamIndex) {
         this.teamIndex = teamIndex;
+        return this;
     }
 
     public String getTeamName() {
         return teamName;
     }
 
-    public void setTeamName(String teamName) {
+    public Team setTeamName(String teamName) {
         this.teamName = teamName;
+        return this;
     }
 
-    public String getTeamType() {
+    public TeamType getTeamType() {
         return teamType;
     }
 
-    public void setTeamType(String teamType) {
+    public Team setTeamType(TeamType teamType) {
         this.teamType = teamType;
+        return this;
     }
 
     public String getPracticeLocation() {
         return practiceLocation;
     }
 
-    public void setPracticeLocation(String practiceLocation) {
+    public Team setPracticeLocation(String practiceLocation) {
         this.practiceLocation = practiceLocation;
+        return this;
     }
 
     public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public Team setStartTime(Date startTime) {
         this.startTime = startTime;
+        return this;
     }
 
     public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public Team setEndTime(Date endTime) {
         this.endTime = endTime;
+        return this;
     }
 
-    public String getApplyState() {
+    public ApplyState getApplyState() {
         return applyState;
     }
 
-    public void setApplyState(String applyState) {
+    public Team setApplyState(ApplyState applyState) {
         this.applyState = applyState;
+        return this;
     }
 
     public Leader getLeader() {
         return leader;
     }
 
-    public void setLeader(Leader leader) {
+    public Team setLeader(Leader leader) {
         this.leader = leader;
+        return this;
     }
 
     public Instructor getInstructor() {
         return instructor;
     }
 
-    public void setInstructor(Instructor instructor) {
+    public Team setInstructor(Instructor instructor) {
         this.instructor = instructor;
+        return this;
     }
 
     public Expert getExpert() {
         return expert;
     }
 
-    public void setExpert(Expert expert) {
+    public Team setExpert(Expert expert) {
         this.expert = expert;
+        return this;
     }
 
     @Override

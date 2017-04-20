@@ -1,9 +1,8 @@
 package DB_model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import DB_model.Util.UserType;
+
+import javax.persistence.*;
 
 /**
  * Created by Administrator on 2017/4/17.
@@ -11,47 +10,48 @@ import javax.persistence.Id;
 @Entity
 public class User  {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int UID;
-
     private String account;
 
-    private String userType;
+    @Column(nullable = false,unique = true)
+    private int stuID;
 
-    private int infoID;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserType userType;
 
-    public int getUID() {
-        return UID;
+    public User() {
     }
 
-    public void setUID(int UID) {
-        this.UID = UID;
+    public User(String account, int stuID, UserType userType) {
+        this.account = account;
+        this.stuID = stuID;
+        this.userType = userType;
     }
 
     public String getAccount() {
         return account;
     }
 
-    public void setAccount(String account) {
+    public User setAccount(String account) {
         this.account = account;
+        return this;
     }
 
-    public String getUserType() {
+    public int getStuID() {
+        return stuID;
+    }
+
+    public User setStuID(int stuID) {
+        this.stuID = stuID;
+        return this;
+    }
+
+    public UserType getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public User setUserType(UserType userType) {
         this.userType = userType;
+        return this;
     }
-
-    public int getInfoID() {
-        return infoID;
-    }
-
-    public void setInfoID(int infoID) {
-        this.infoID = infoID;
-    }
-
-
-
 }

@@ -1,4 +1,4 @@
-package DB_model;
+package DB_model.Util;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
@@ -24,16 +24,18 @@ public class IDInfo implements Serializable {
         return idType;
     }
 
-    public void setIdType(String idType) {
+    public IDInfo setIdType(String idType) {
         this.idType = idType;
+        return this;
     }
 
     public String getIdNum() {
         return idNum;
     }
 
-    public void setIdNum(String idNum) {
+    public IDInfo setIdNum(String idNum) {
         this.idNum = idNum;
+        return this;
     }
 
     @Override

@@ -37,6 +37,7 @@ public class LeaderDaoImpl implements LeaderDao {
 
             if (leader != null) {
                 //Reset members foreign key
+                Hibernate.initialize(leader.getMembers());
                 List<Member> members = new ArrayList<Member>(leader.getMembers());
                 for (Member member : members) {
                     member.setLeader(null);

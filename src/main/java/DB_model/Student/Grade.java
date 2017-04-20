@@ -36,40 +36,45 @@ public class Grade implements Serializable {
         return introClassGrade;
     }
 
-    public void setIntroClassGrade(int introClassGrade) {
+    public Grade setIntroClassGrade(int introClassGrade) {
         this.introClassGrade = introClassGrade;
+        return this;
     }
 
     public int getSubPandectClass() {
         return subPandectClass;
     }
 
-    public void setSubPandectClass(int subPandectClass) {
+    public Grade setSubPandectClass(int subPandectClass) {
         this.subPandectClass = subPandectClass;
+        return this;
     }
 
     public int getTeam() {
         return team;
     }
 
-    public void setTeam(int team) {
+    public Grade setTeam(int team) {
         this.team = team;
+        return this;
     }
 
     public int getParticipation() {
         return participation;
     }
 
-    public void setParticipation(int participation) {
+    public Grade setParticipation(int participation) {
         this.participation = participation;
+        return this;
     }
 
     public int getReport() {
         return report;
     }
 
-    public void setReport(int report) {
+    public Grade setReport(int report) {
         this.report = report;
+        return this;
     }
 
     @Override

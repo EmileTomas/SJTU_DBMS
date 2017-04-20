@@ -1,6 +1,6 @@
 package DB_model.Teacher;
 
-import DB_model.IDInfo;
+import DB_model.Util.IDInfo;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -17,8 +17,7 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int teacherId;
 
-    private IDInfo idInfo;
-
+    @Column(nullable = false,unique = true)
     private String teacherNum;
 
     private String name;
@@ -33,6 +32,8 @@ public class Teacher {
 
     private Date birthday;
 
+    @Embedded
+    private IDInfo idInfo;
 
     public Teacher() {
     }
@@ -41,72 +42,81 @@ public class Teacher {
         return teacherId;
     }
 
-    public void setTeacherId(int teacherId) {
+    public Teacher setTeacherId(int teacherId) {
         this.teacherId = teacherId;
+        return this;
     }
 
     public IDInfo getIdInfo() {
         return idInfo;
     }
 
-    public void setIdInfo(IDInfo idInfo) {
+    public Teacher setIdInfo(IDInfo idInfo) {
         this.idInfo = idInfo;
+        return this;
     }
 
     public String getTeacherNum() {
         return teacherNum;
     }
 
-    public void setTeacherNum(String teacherNum) {
+    public Teacher setTeacherNum(String teacherNum) {
         this.teacherNum = teacherNum;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Teacher setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getJobTitle() {
         return jobTitle;
     }
 
-    public void setJobTitle(String jobTitle) {
+    public Teacher setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
+        return this;
     }
 
     public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public Teacher setDepartment(String department) {
         this.department = department;
+        return this;
     }
 
     public String getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(String phoneNum) {
+    public Teacher setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Teacher setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public Teacher setBirthday(Date birthday) {
         this.birthday = birthday;
+        return this;
     }
 
     @Override

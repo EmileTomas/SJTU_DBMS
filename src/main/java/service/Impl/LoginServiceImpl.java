@@ -20,9 +20,9 @@ public class LoginServiceImpl implements LoginService {
     public String login(LoginInfo loginInfo, HttpSession session){
         User user=userDao.find(loginInfo.getAccount());
         if(user!=null){
-            session.setAttribute("id",user.getUID());
             session.setAttribute("account",user.getAccount());
             session.setAttribute("type",user.getUserType());
+            session.setAttribute("stuID",user.getStuID());
             return "Success";
         }
         return "Fail";

@@ -14,6 +14,7 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("Member")
 public class Member extends Student {
+    @Column(nullable = false,unique = true)
     private String stuNumber;
 
     private String department;
@@ -29,44 +30,49 @@ public class Member extends Student {
     @OneToMany(targetEntity = Apply.class,mappedBy ="member")
     private Set<Apply> applies=new HashSet<>();
 
-    public Grade getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }
-
     public String getStuNumber() {
         return stuNumber;
     }
 
-    public void setStuNumber(String stuNumber) {
+    public Member setStuNumber(String stuNumber) {
         this.stuNumber = stuNumber;
+        return this;
     }
 
     public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public Member setDepartment(String department) {
         this.department = department;
+        return this;
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public Member setGrade(Grade grade) {
+        this.grade = grade;
+        return this;
     }
 
     public Leader getLeader() {
         return leader;
     }
 
-    public void setLeader(Leader leader) {
+    public Member setLeader(Leader leader) {
         this.leader = leader;
+        return this;
     }
 
     public Set<Apply> getApplies() {
         return applies;
     }
 
-    public void setApplies(Set<Apply> applies) {
+    public Member setApplies(Set<Apply> applies) {
         this.applies = applies;
+        return this;
     }
 
     @Override

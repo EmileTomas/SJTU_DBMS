@@ -1,7 +1,6 @@
 package DB_model.Student;
 
-import DB_model.IDInfo;
-
+import DB_model.Util.IDInfo;
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -31,74 +30,78 @@ public class Student {
     private Date birthday;
 
     @Embedded
-    private IDInfo IDInfo;
-
-    public Student() {
-    }
-
+    private IDInfo idInfo;
 
     public int getStuID() {
         return stuID;
     }
 
-    public void setStuID(int stuID) {
+    public Student setStuID(int stuID) {
         this.stuID = stuID;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Student setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getEducationBg() {
         return educationBg;
     }
 
-    public void setEducationBg(String educationBg) {
+    public Student setEducationBg(String educationBg) {
         this.educationBg = educationBg;
+        return this;
     }
 
     public String getPhoneNum() {
         return phoneNum;
     }
 
-    public void setPhoneNum(String phoneNum) {
+    public Student setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Student setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getSchool() {
         return school;
     }
 
-    public void setSchool(String school) {
+    public Student setSchool(String school) {
         this.school = school;
+        return this;
     }
 
     public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public Student setBirthday(Date birthday) {
         this.birthday = birthday;
+        return this;
     }
 
-    public DB_model.IDInfo getIDInfo() {
-        return IDInfo;
+    public IDInfo getIdInfo() {
+        return idInfo;
     }
 
-    public void setIDInfo(DB_model.IDInfo IDInfo) {
-        this.IDInfo = IDInfo;
+    public Student setIdInfo(IDInfo idInfo) {
+        this.idInfo = idInfo;
+        return this;
     }
 
     @Override
@@ -114,7 +117,7 @@ public class Student {
         if (email != null ? !email.equals(student.email) : student.email != null) return false;
         if (school != null ? !school.equals(student.school) : student.school != null) return false;
         if (birthday != null ? !birthday.equals(student.birthday) : student.birthday != null) return false;
-        return IDInfo != null ? IDInfo.equals(student.IDInfo) : student.IDInfo == null;
+        return idInfo != null ? idInfo.equals(student.idInfo) : student.idInfo == null;
     }
 
     @Override
@@ -125,7 +128,7 @@ public class Student {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (school != null ? school.hashCode() : 0);
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
-        result = 31 * result + (IDInfo != null ? IDInfo.hashCode() : 0);
+        result = 31 * result + (idInfo != null ? idInfo.hashCode() : 0);
         return result;
     }
 }

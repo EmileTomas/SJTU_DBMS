@@ -10,12 +10,13 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("Leader")
 public class Leader extends Student {
-    @Embedded
-    private Grade grade;
-
+    @Column(nullable = false,unique = true)
     private String stuNumber;
 
     private String department;
+
+    @Embedded
+    private Grade grade;
 
     @OneToMany(targetEntity = Member.class, mappedBy = "leader")
     private Set<Member> members = new HashSet<>();
@@ -29,60 +30,67 @@ public class Leader extends Student {
     @OneToOne(targetEntity = Team.class,mappedBy = "leader")
     private Team team;
 
-    public Grade getGrade() {
-        return grade;
-    }
-
-    public void setGrade(Grade grade) {
-        this.grade = grade;
-    }
-
     public String getStuNumber() {
         return stuNumber;
     }
 
-    public void setStuNumber(String stuNumber) {
+    public Leader setStuNumber(String stuNumber) {
         this.stuNumber = stuNumber;
+        return this;
     }
 
     public String getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public Leader setDepartment(String department) {
         this.department = department;
+        return this;
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public Leader setGrade(Grade grade) {
+        this.grade = grade;
+        return this;
     }
 
     public Set<Member> getMembers() {
         return members;
     }
 
-    public void setMembers(Set<Member> members) {
+    public Leader setMembers(Set<Member> members) {
         this.members = members;
+        return this;
     }
 
     public Set<SpecialStudent> getSpecialStudents() {
         return specialStudents;
     }
 
-    public void setSpecialStudents(Set<SpecialStudent> specialStudents) {
+    public Leader setSpecialStudents(Set<SpecialStudent> specialStudents) {
         this.specialStudents = specialStudents;
+        return this;
     }
 
     public Set<Apply> getApplies() {
         return applies;
     }
 
-    public void setApplies(Set<Apply> applies) {
+    public Leader setApplies(Set<Apply> applies) {
         this.applies = applies;
+        return this;
     }
 
     public Team getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public Leader setTeam(Team team) {
         this.team = team;
+        return this;
     }
 
     @Override

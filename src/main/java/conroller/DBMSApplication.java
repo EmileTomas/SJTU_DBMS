@@ -22,12 +22,10 @@ public class DBMSApplication {
 		MemberDao memberDao=new MemberDaoImpl();
 		TeamDao teamDao=new TeamDaoImpl();
 
-		Member member1=new Member();
-		Member member2=new Member();
-		Leader leader1=new Leader();
-		Leader leader2=new Leader();
-
-
+		Member member1=new Member().setStuNumber("5140309349");
+		Member member2=new Member().setStuNumber("5140000000");
+		Leader leader1=new Leader().setStuNumber("5130101111");
+		Leader leader2=new Leader().setStuNumber("51201211212");
 
 		memberDao.save(member1);
 		memberDao.save(member2);

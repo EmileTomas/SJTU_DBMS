@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @DiscriminatorValue("SpecialStudent")
 public class SpecialStudent extends Student {
     @ManyToOne(targetEntity = Leader.class)
-    @JoinColumn(name = "leaderID", referencedColumnName = "stuID")
+    @JoinColumn(name = "leaderID", referencedColumnName = "stuID",nullable = false)
     @Cascade(CascadeType.SAVE_UPDATE)
     private Leader leader;
 
@@ -26,8 +26,9 @@ public class SpecialStudent extends Student {
         return leader;
     }
 
-    public void setLeader(Leader leader) {
+    public SpecialStudent setLeader(Leader leader) {
         this.leader = leader;
+        return this;
     }
 
     @Override

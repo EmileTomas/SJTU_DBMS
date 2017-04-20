@@ -52,7 +52,6 @@ public class InstructorDaoImpl implements InstructorDao {
         }
     }
 
-
     public Instructor find(int instructorID) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Instructor instructor = null;

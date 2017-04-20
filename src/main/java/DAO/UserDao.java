@@ -10,9 +10,7 @@ import java.util.List;
 public interface UserDao {
     public void save(User user);
 
-    public void delete(int userID);
-
-    public User find(int userID);
+    public void delete(String account);
 
     public User find(String account);
 

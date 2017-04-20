@@ -24,7 +24,8 @@ public class Instructor extends Teacher {
         return teams;
     }
 
-    public void setTeams(Set<Team> teams) {
+    public Instructor setTeams(Set<Team> teams) {
         this.teams = teams;
+        return this;
     }
 }

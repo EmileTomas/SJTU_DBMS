@@ -10,6 +10,4 @@ import javax.servlet.http.HttpSession;
 
 public interface LoginService {
     public String login(LoginInfo loginInfo, HttpSession session);
-
-
 }
